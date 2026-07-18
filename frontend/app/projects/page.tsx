@@ -13,7 +13,7 @@ export default function Page() {
                 </p>
                 <div className="py-6 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6">
                     {projects.map((project) => (
-                        <ProjectCard project={project} key={project.title} variant="full" />
+                        <ProjectCard project={project} key={project.id} variant="full" />
                     ))}
                 </div>
             </div>
