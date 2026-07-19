@@ -1,12 +1,19 @@
-type ProjectStatus =
-    | "planned"
-    | "inProgress"
-    | "completed";
+export type ProjectStatus =
+    | "Planned"
+    | "In Progress"
+    | "Completed";
 
-type ProjectDifficulty = 
-    | "beginner" 
-    | "intermediate" 
-    | "advanced";
+export type ProjectDifficulty =
+    | "Beginner"
+    | "Intermediate"
+    | "Advanced";
+
+export type ProjectCategory =
+    | "Robotics"
+    | "Electronics"
+    | "Computer Science"
+    | "Game Development"
+    | "Web Development";
 
 export type Project = {
     id: number;
@@ -20,7 +27,7 @@ export type Project = {
     demoUrl: string;
     startDate?: Date;
     lastUpdated?: Date;
-    category: string;
+    category: ProjectCategory;
     difficulty: ProjectDifficulty;
     viewCount: number;
     slug: string;
