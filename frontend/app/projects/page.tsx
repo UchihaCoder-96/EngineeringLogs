@@ -37,9 +37,8 @@ export default function Page() {
 
     return (
         <section className="min-h-screen bg-zinc-950 text-white">
-            <div className="mx-auto max-w-7xl px-6 py-20">
+            <div className="mx-auto max-w-5xl px-6 py-20">
 
-                {/* Header */}
                 <div className="text-center">
                     <h1 className="text-5xl font-bold tracking-tight">
                         My Projects
@@ -51,10 +50,8 @@ export default function Page() {
                     </p>
                 </div>
 
-                {/* Search & Filters */}
                 <div className="mt-12 rounded-3xl border border-zinc-800 bg-zinc-900/70 p-6 backdrop-blur">
 
-                    {/* Search */}
                     <div className="flex flex-col gap-4 lg:flex-row">
 
                         <input
@@ -104,7 +101,6 @@ export default function Page() {
 
                     </div>
 
-                    {/* Filters */}
                     <div className="mt-6 grid gap-5 md:grid-cols-3">
 
                         <div>
@@ -186,8 +182,7 @@ export default function Page() {
 
                 </div>
 
-                {/* Result Count */}
-                <div className="mt-8 flex items-center justify-between">
+                <div className="mt-8 flex items-center justify-between mt-8 border-b border-zinc-800 pb-4">
 
                     <p className="text-sm text-zinc-500">
                         Showing{" "}
