@@ -5,7 +5,7 @@ export const projects: Project[] = [
         id: 1,
         title: "Hexapod Robot",
         shortDescription: "A six-legged walking robot.",
-        status: "Planned",
+        status: "planned",
         technologies: [
             "Arduino",
             "Fusion 360"
@@ -14,8 +14,8 @@ export const projects: Project[] = [
         thumbnail: "/images/projects/hexapod.png",
         githubUrl: "",
         demoUrl: "",
-        category: "Robotics",
-        difficulty: "Advanced",
+        category: "robotics",
+        difficulty: "advanced",
         viewCount: 0,
         slug: "hexapod-robot"
     },
@@ -23,7 +23,7 @@ export const projects: Project[] = [
         id: 2,
         title: "Image Processing Application",
         shortDescription: "An application for processing and analyzing images.",
-        status: "Completed",
+        status: "completed",
         technologies: [
             "Python",
             "OpenCV",
@@ -34,8 +34,8 @@ export const projects: Project[] = [
         demoUrl: "",
         startDate: new Date("2023-04-05"),
         lastUpdated: new Date("2026-07-15"),
-        category: "Software",
-        difficulty: "Intermediate",
+        category: "computerScience",
+        difficulty: "intermediate",
         viewCount: 0,
         slug: "image-processing-application"
     },
@@ -43,7 +43,7 @@ export const projects: Project[] = [
         id: 3,
         title: "3D Multiplayer Game",
         shortDescription: "A 3D multiplayer game built with modern game development techniques.",
-        status: "In Progress",
+        status: "inProgress",
         technologies: [
             "Unreal Engine",
             "C++",
@@ -53,8 +53,8 @@ export const projects: Project[] = [
         demoUrl: "",
         startDate: new Date("2025-06-08"),
         lastUpdated: new Date("2026-01-11"),
-        category: "Software",
-        difficulty: "Intermediate",
+        category: "gameDevelopment",
+        difficulty: "intermediate",
         viewCount: 0,
         slug: "3d-multiplayer-game"
     }

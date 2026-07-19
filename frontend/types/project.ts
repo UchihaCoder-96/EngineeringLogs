@@ -1,12 +1,12 @@
 type ProjectStatus =
-    | "Planned"
-    | "In Progress"
-    | "Completed";
+    | "planned"
+    | "inProgress"
+    | "completed";
 
 type ProjectDifficulty = 
-    | "Beginner" 
-    | "Intermediate" 
-    | "Advanced";
+    | "beginner" 
+    | "intermediate" 
+    | "advanced";
 
 export type Project = {
     id: number;
