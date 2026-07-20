@@ -13,10 +13,10 @@
     }
   ],
   "paths": {
-    "/api/Journal": {
+    "/api/Journals": {
       "get": {
         "tags": [
-          "Journal"
+          "Journals"
         ],
         "responses": {
           "200": {
@@ -25,10 +25,10 @@
         }
       }
     },
-    "/api/Journal/{slug}": {
+    "/api/Journals/{slug}": {
       "get": {
         "tags": [
-          "Journal"
+          "Journals"
         ],
         "parameters": [
           {
@@ -84,7 +84,7 @@
   },
   "tags": [
     {
-      "name": "Journal"
+      "name": "Journals"
     },
     {
       "name": "Projects"

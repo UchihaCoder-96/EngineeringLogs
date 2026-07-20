@@ -1,5 +1,6 @@
-import { journals } from "@/data/journal";
+//import { journals } from "@/data/journal";
 import { notFound } from "next/navigation";
+import { getJournal } from "@/lib/journals";
 
 export default async function Page({
     params,
@@ -8,7 +9,8 @@ export default async function Page({
 }) {
     const { slug } = await params;
 
-    const journal = journals.find((j) => j.slug === slug);
+    const journal = await getJournal(slug);
+    // const journal = journals.find((j) => j.slug === slug);
 
     if (!journal) {
         notFound();

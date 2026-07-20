@@ -8,7 +8,12 @@ export async function getJournals(): Promise<Journal[]> {
         throw new Error("Failed to fetch journals");
     }
 
-    return response.json();
+    const journals = await response.json();
+
+    return journals.map((journal: Journal) => ({
+        ...journal,
+        date: new Date(journal.date),
+    }));
 }
 
 export async function getJournal(slug: string): Promise<Journal> {
@@ -18,5 +23,10 @@ export async function getJournal(slug: string): Promise<Journal> {
         throw new Error("Failed to fetch journal");
     }
 
-    return response.json();
+    const journal = await response.json();
+
+    return {
+        ...journal,
+        date: new Date(journal.date),
+    };
 }

@@ -5,11 +5,11 @@ namespace EngineeringLogs.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class JournalController : ControllerBase
+    public class JournalsController : ControllerBase
     {
         private readonly IJournalService _journalService;
 
-        public JournalController(IJournalService journalService)
+        public JournalsController(IJournalService journalService)
         {
             _journalService = journalService;
         }

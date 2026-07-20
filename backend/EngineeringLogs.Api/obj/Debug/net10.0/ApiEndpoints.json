@@ -1,8 +1,8 @@
 [
   {
-    "ContainingType": "EngineeringLogs.Api.Controllers.JournalController",
+    "ContainingType": "EngineeringLogs.Api.Controllers.JournalsController",
     "Method": "GetJournals",
-    "RelativePath": "api/Journal",
+    "RelativePath": "api/Journals",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -10,9 +10,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "EngineeringLogs.Api.Controllers.JournalController",
+    "ContainingType": "EngineeringLogs.Api.Controllers.JournalsController",
     "Method": "GetJournalBySlug",
-    "RelativePath": "api/Journal/{slug}",
+    "RelativePath": "api/Journals/{slug}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

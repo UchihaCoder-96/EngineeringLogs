@@ -1,5 +1,6 @@
-import { projects } from "@/data/projects";
+//import { projects } from "@/data/projects";
 import { notFound } from "next/navigation";
+import { getProject } from "@/lib/projects";
 
 export default async function Page({
     params,
@@ -8,7 +9,8 @@ export default async function Page({
 }) {
     const { slug } = await params;
 
-    const project = projects.find((p) => p.slug === slug);
+    const project = await getProject(slug);
+    // const project = projects.find((p) => p.slug === slug);
 
     if (!project) {
         notFound();
