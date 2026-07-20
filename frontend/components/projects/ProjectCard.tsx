@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Project } from "@/types/project";
+import { formatEnums } from "@/utils/Utility";
 
 export default function ProjectCard({
     project,
@@ -14,24 +15,20 @@ export default function ProjectCard({
         <Link href={`/projects/${project.slug}`}>
             <article className="group overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/60 hover:shadow-xl hover:shadow-blue-500/10">
 
-                {/* Thumbnail */}
                 <div className="aspect-video bg-zinc-800 flex items-center justify-center text-zinc-500">
                     Image Placeholder
                 </div>
 
                 <div className="p-6">
 
-                    {/* Category */}
                     <span className="text-xs uppercase tracking-wider text-blue-400">
-                        {project.category}
+                        {formatEnums(project.category)}
                     </span>
 
-                    {/* Title */}
                     <h3 className="mt-2 text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
                         {project.title}
                     </h3>
 
-                    {/* Description */}
                     {showDescription && (
                         <p className="mt-3 text-zinc-400 leading-7">
                             {project.shortDescription}
@@ -59,17 +56,17 @@ export default function ProjectCard({
                                 className={`rounded-full px-3 py-1 text-xs font-medium ${
                                     project.status === "Completed"
                                         ? "bg-green-500/15 text-green-400"
-                                        : project.status === "In Progress"
+                                        : formatEnums(project.status) === "In Progress"
                                         ? "bg-yellow-500/15 text-yellow-400"
                                         : "bg-blue-500/15 text-blue-400"
                                 }`}
                             >
-                                {project.status}
+                                {formatEnums(project.status)}
                             </span>
 
                             {variant === "full" && (
                                 <span className="text-sm text-zinc-500">
-                                    {project.difficulty}
+                                    {formatEnums(project.difficulty)}
                                 </span>
                             )}
                         </div>

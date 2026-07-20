@@ -1,5 +1,31 @@
 [
   {
+    "ContainingType": "EngineeringLogs.Api.Controllers.JournalController",
+    "Method": "GetJournals",
+    "RelativePath": "api/Journal",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EngineeringLogs.Api.Controllers.JournalController",
+    "Method": "GetJournalBySlug",
+    "RelativePath": "api/Journal/{slug}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "slug",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "EngineeringLogs.Api.Controllers.ProjectsController",
     "Method": "GetProjects",
     "RelativePath": "api/Projects",
@@ -7,6 +33,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EngineeringLogs.Api.Controllers.ProjectsController",
+    "Method": "GetProjectBySlug",
+    "RelativePath": "api/Projects/{slug}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "slug",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   }
 ]

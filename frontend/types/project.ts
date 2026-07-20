@@ -1,6 +1,6 @@
 export type ProjectStatus =
     | "Planned"
-    | "In Progress"
+    | "InProgress"
     | "Completed";
 
 export type ProjectDifficulty =
@@ -11,9 +11,9 @@ export type ProjectDifficulty =
 export type ProjectCategory =
     | "Robotics"
     | "Electronics"
-    | "Computer Science"
-    | "Game Development"
-    | "Web Development";
+    | "ComputerScience"
+    | "GameDevelopment"
+    | "WebDevelopment";
 
 export type Project = {
     id: number;
