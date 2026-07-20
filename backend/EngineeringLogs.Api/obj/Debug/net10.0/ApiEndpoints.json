@@ -1,0 +1,12 @@
+[
+  {
+    "ContainingType": "EngineeringLogs.Api.Controllers.ProjectsController",
+    "Method": "GetProjects",
+    "RelativePath": "api/Projects",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

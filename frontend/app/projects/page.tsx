@@ -194,7 +194,6 @@ export default function Page() {
 
                 </div>
 
-                {/* Projects */}
                 <div className="mt-6 grid gap-8">
 
                     {filteredProjects.length > 0 ? (
