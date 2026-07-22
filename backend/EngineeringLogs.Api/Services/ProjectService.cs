@@ -1,4 +1,4 @@
-﻿using EngineeringLogs.Api.DTOs;
+﻿using EngineeringLogs.Api.DTOs.Projects;
 using EngineeringLogs.Api.Extensions;
 using EngineeringLogs.Api.Models;
 using EngineeringLogs.Api.Models.Enums;

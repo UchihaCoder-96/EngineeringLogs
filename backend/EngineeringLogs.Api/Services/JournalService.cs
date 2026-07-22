@@ -1,4 +1,4 @@
-﻿using EngineeringLogs.Api.DTOs;
+﻿using EngineeringLogs.Api.DTOs.Journals;
 using EngineeringLogs.Api.Extensions;
 using EngineeringLogs.Api.Models;
 

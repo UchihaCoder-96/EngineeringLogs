@@ -1,5 +1,5 @@
 ﻿using EngineeringLogs.Api.Models;
-using EngineeringLogs.Api.DTOs;
+using EngineeringLogs.Api.DTOs.Journals;
 
 namespace EngineeringLogs.Api.Services
 {

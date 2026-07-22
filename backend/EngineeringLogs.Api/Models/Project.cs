@@ -16,7 +16,7 @@ public class Project
 
     public int? FeaturedOrder { get; set; }
 
-    public string Thumbnail { get; set; } = string.Empty;
+    public string Thumbnail { get; set; } = string.Empty; // Url
 
     public string GithubUrl { get; set; } = string.Empty;
 

@@ -1,4 +1,4 @@
-﻿namespace EngineeringLogs.Api.DTOs
+﻿namespace EngineeringLogs.Api.DTOs.Journals
 {
     public class JournalDto
     {
