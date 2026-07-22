@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import JournalCard from "@/components/journal/JournalCard";
 import { Journal } from "@/types/journal";
 
@@ -128,12 +128,10 @@ export default function JournalClient({
 
                     {filteredJournals.length > 0 ? (
                         filteredJournals.map((journal) => (
-                            <>
-                                <JournalCard
-                                    key={journal.id}
-                                    journal={journal} />
+                            <Fragment key={journal.id}>
+                                <JournalCard journal={journal} />
                                 <br />
-                            </>
+                            </Fragment>
                         ))
                     ) : (
                         <div className="rounded-2xl border border-dashed border-zinc-800 py-16 text-center">

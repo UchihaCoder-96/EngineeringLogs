@@ -17,6 +17,10 @@ namespace EngineeringLogs.Api.Extensions
                 Difficulty = project.Difficulty.ToString(),
                 ViewCount = project.ViewCount,
                 Slug = project.Slug,
+                GithubUrl = project.GithubUrl,
+                DemoUrl = project.DemoUrl,
+                Thumbnail = project.Thumbnail,
+                Technologies = project.Technologies
             };
         }
     }

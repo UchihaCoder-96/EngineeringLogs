@@ -17,5 +17,13 @@
         public int ViewCount { get; set; }
 
         public string Slug { get; set; } = string.Empty;
+
+        public string GithubUrl { get; set; } = string.Empty;
+
+        public string DemoUrl { get; set; } = string.Empty;
+
+        public string Thumbnail { get; set; } = string.Empty;
+
+        public List<string> Technologies { get; set; } = new List<string>();
     }
 }
