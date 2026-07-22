@@ -15,7 +15,9 @@ public class ProjectService : IProjectService
         _logger = logger;
     }
 
-    private static readonly List<Project> _projects = new()
+    private static readonly List<Project> _projects = new();
+
+    private static readonly List<Project> __projects = new()
     {
         new Project
             {
