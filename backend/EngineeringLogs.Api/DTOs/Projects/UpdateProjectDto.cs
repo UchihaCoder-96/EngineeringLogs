@@ -6,10 +6,12 @@ namespace EngineeringLogs.Api.DTOs.Projects
     public class UpdateProjectDto
     {
         [Required]
+        [MinLength(5)]
         [MaxLength(100)]
         public string Title { get; set; } = string.Empty;
 
         [Required]
+        [MinLength(10)]
         [MaxLength(500)]
         public string ShortDescription { get; set; } = string.Empty;
 
@@ -26,7 +28,7 @@ namespace EngineeringLogs.Api.DTOs.Projects
         public string? DemoUrl { get; set; }
 
         [MinLength(1)]
-        public List<string> Technologies { get; set; } = [];
+        public List<string> Technologies { get; set; } = new List<string>();
 
         [Required]
         public ProjectStatus Status { get; set; }

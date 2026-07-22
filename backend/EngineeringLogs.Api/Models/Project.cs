@@ -12,7 +12,7 @@ public class Project
 
     public ProjectStatus Status { get; set; }
 
-    public List<string> Technologies { get; set; } = [];
+    public List<string> Technologies { get; set; } = new List<string>();
 
     public int? FeaturedOrder { get; set; }
 

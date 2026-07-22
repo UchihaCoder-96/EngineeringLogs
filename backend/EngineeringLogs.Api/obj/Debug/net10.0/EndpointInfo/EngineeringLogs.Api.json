@@ -57,6 +57,36 @@
             "description": "OK"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProjectDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProjectDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProjectDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/api/Projects/{slug}": {
@@ -77,6 +107,195 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProjectDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProjectDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProjectDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateProjectDto": {
+        "required": [
+          "title",
+          "shortDescription",
+          "category",
+          "difficulty",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "maxLength": 100,
+            "minLength": 5,
+            "type": "string"
+          },
+          "shortDescription": {
+            "maxLength": 500,
+            "minLength": 10,
+            "type": "string"
+          },
+          "category": {
+            "$ref": "#/components/schemas/ProjectCategory"
+          },
+          "difficulty": {
+            "$ref": "#/components/schemas/ProjectDifficulty"
+          },
+          "githubUrl": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uri"
+          },
+          "demoUrl": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uri"
+          },
+          "technologies": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "$ref": "#/components/schemas/ProjectStatus"
+          },
+          "thumbnail": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uri"
+          }
+        }
+      },
+      "ProjectCategory": {
+        "type": "integer"
+      },
+      "ProjectDifficulty": {
+        "type": "integer"
+      },
+      "ProjectStatus": {
+        "type": "integer"
+      },
+      "UpdateProjectDto": {
+        "required": [
+          "title",
+          "shortDescription",
+          "category",
+          "difficulty",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "maxLength": 100,
+            "type": "string"
+          },
+          "shortDescription": {
+            "maxLength": 500,
+            "type": "string"
+          },
+          "category": {
+            "$ref": "#/components/schemas/ProjectCategory"
+          },
+          "difficulty": {
+            "$ref": "#/components/schemas/ProjectDifficulty"
+          },
+          "githubUrl": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uri"
+          },
+          "demoUrl": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uri"
+          },
+          "technologies": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "$ref": "#/components/schemas/ProjectStatus"
+          },
+          "thumbnail": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uri"
           }
         }
       }

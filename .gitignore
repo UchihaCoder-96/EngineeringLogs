@@ -47,8 +47,8 @@ frontend/next-env.d.ts
 # Backend (ASP.NET Core)
 # =====================================
 
-backend/bin/
-backend/obj/
+backend/EngineeringLogs.Api/bin/
+backend/EngineeringLogs.Api/obj/
 
 # User-specific files
 *.user

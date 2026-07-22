@@ -6,8 +6,8 @@ namespace EngineeringLogs.Api.Services;
 
 public class JournalService : IJournalService
 {
-    private static readonly List<Journal> _journals =
-    [
+    private static readonly List<Journal> _journals = new()
+    {
         new Journal
         {
             Id = 1,
@@ -15,12 +15,12 @@ public class JournalService : IJournalService
             Slug = "created-python-project-for-image-processing",
             Date = new DateTime(2023, 4, 5),
             Summary = "Made a Python project for image processing using OpenCV.",
-            Tags =
-            [
+            Tags = new List<string>
+            {
                 "Python",
                 "Image Processing",
                 "OpenCV"
-            ],
+            },
             ProjectSlug = "image-processing-application"
         },
 
@@ -31,12 +31,12 @@ public class JournalService : IJournalService
             Slug = "added-ui-elements-to-image-processing-application",
             Date = new DateTime(2023, 4, 6),
             Summary = "Added UI elements to the image processing application using PyQt5.",
-            Tags =
-            [
+            Tags = new List<string>
+            {
                 "Python",
                 "Image Processing",
                 "OpenCV"
-            ],
+            },
             ProjectSlug = "image-processing-application"
         },
 
@@ -47,15 +47,15 @@ public class JournalService : IJournalService
             Slug = "added-image-filtering-feature-to-image-processing-application",
             Date = new DateTime(2023, 4, 7),
             Summary = "Added image filtering feature to the image processing application using OpenCV and kernel algorithms.",
-            Tags =
-            [
+            Tags = new List<string>
+            {
                 "Python",
                 "Image Processing",
                 "OpenCV"
-            ],
+            },
             ProjectSlug = "image-processing-application"
         }
-    ];
+    };
 
     public IEnumerable<JournalDto> GetJournals()
     {

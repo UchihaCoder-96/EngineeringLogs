@@ -12,7 +12,7 @@ public class Journal
 
     public string Summary { get; set; } = string.Empty;
 
-    public List<string> Tags { get; set; } = [];
+    public List<string> Tags { get; set; } = new List<string>();
 
     public string? ProjectSlug { get; set; }
 }

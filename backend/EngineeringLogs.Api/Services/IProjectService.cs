@@ -7,5 +7,8 @@ namespace EngineeringLogs.Api.Services
     {
         IEnumerable<ProjectDto> GetProjects();
         ProjectDto? GetProjectBySlug(string slug);
+        ProjectDto CreateProject(CreateProjectDto createProjectDto);
+        ProjectDto? UpdateProject(string slug, UpdateProjectDto updateProjectDto);
+        bool DeleteProject(string slug);
     }
 }

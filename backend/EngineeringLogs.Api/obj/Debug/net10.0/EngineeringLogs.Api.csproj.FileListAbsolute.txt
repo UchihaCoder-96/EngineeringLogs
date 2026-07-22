@@ -33,3 +33,6 @@ C:\Users\YASH RAJ\Documents\EngineeringLogs\backend\EngineeringLogs.Api\obj\Debu
 C:\Users\YASH RAJ\Documents\EngineeringLogs\backend\EngineeringLogs.Api\obj\Debug\net10.0\EngineeringLogs.Api.pdb
 C:\Users\YASH RAJ\Documents\EngineeringLogs\backend\EngineeringLogs.Api\obj\Debug\net10.0\EngineeringLogs.Api.genruntimeconfig.cache
 C:\Users\YASH RAJ\Documents\EngineeringLogs\backend\EngineeringLogs.Api\obj\Debug\net10.0\ref\EngineeringLogs.Api.dll
+C:\Users\YASH RAJ\Documents\EngineeringLogs\backend\EngineeringLogs.Api\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\YASH RAJ\Documents\EngineeringLogs\backend\EngineeringLogs.Api\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\YASH RAJ\Documents\EngineeringLogs\backend\EngineeringLogs.Api\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
