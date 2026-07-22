@@ -1,10 +1,11 @@
-﻿using EngineeringLogs.Api.Models;
+﻿using EngineeringLogs.Api.DTOs;
+using EngineeringLogs.Api.Models;
 
 namespace EngineeringLogs.Api.Services
 {
     public interface IProjectService
     {
-        IEnumerable<Project> GetProjects();
-        Project? GetProjectBySlug(string slug);
+        IEnumerable<ProjectDto> GetProjects();
+        ProjectDto? GetProjectBySlug(string slug);
     }
 }

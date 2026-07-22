@@ -1,5 +1,8 @@
-﻿using EngineeringLogs.Api.Models;
+﻿using EngineeringLogs.Api.DTOs;
+using EngineeringLogs.Api.Extensions;
+using EngineeringLogs.Api.Models;
 using EngineeringLogs.Api.Models.Enums;
+using static EngineeringLogs.Api.Extensions.ProjectExtensions;
 
 namespace EngineeringLogs.Api.Services;
 
@@ -73,13 +76,14 @@ public class ProjectService : IProjectService
                 Slug = "3d-multiplayer-game"
             }
     };
-    public IEnumerable<Project> GetProjects()
+    public IEnumerable<ProjectDto> GetProjects()
     {
-        return _projects;
+        return _projects.Select(ProjectExtensions.ToDto);
     }
 
-    public Project? GetProjectBySlug(string slug)
+    public ProjectDto? GetProjectBySlug(string slug)
     {
-        return _projects.FirstOrDefault(p => p.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase));
+        var project = _projects.FirstOrDefault(p => p.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase));
+        return project is null ? null : ProjectExtensions.ToDto(project);
     }
 }
