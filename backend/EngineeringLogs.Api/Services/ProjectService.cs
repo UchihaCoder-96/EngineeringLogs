@@ -2,7 +2,6 @@
 using EngineeringLogs.Api.Extensions;
 using EngineeringLogs.Api.Models;
 using EngineeringLogs.Api.Models.Enums;
-using static EngineeringLogs.Api.Extensions.ProjectExtensions;
 
 namespace EngineeringLogs.Api.Services;
 

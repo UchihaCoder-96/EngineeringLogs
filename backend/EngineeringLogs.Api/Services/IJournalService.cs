@@ -1,10 +1,11 @@
 ﻿using EngineeringLogs.Api.Models;
+using EngineeringLogs.Api.DTOs;
 
 namespace EngineeringLogs.Api.Services
 {
     public interface IJournalService
     {
-        IEnumerable<Journal> GetJournals();
-        Journal? GetJournalBySlug(string slug);
+        IEnumerable<JournalDto> GetJournals();
+        JournalDto? GetJournalBySlug(string slug);
     }
 }

@@ -1,4 +1,6 @@
-﻿using EngineeringLogs.Api.Models;
+﻿using EngineeringLogs.Api.DTOs;
+using EngineeringLogs.Api.Extensions;
+using EngineeringLogs.Api.Models;
 
 namespace EngineeringLogs.Api.Services;
 
@@ -55,12 +57,13 @@ public class JournalService : IJournalService
         }
     ];
 
-    public IEnumerable<Journal> GetJournals()
+    public IEnumerable<JournalDto> GetJournals()
     {
-        return _journals;
+        return _journals.Select(JournalExtensions.ToDto);
     }
-    public Journal? GetJournalBySlug(string slug)
+    public JournalDto? GetJournalBySlug(string slug)
     {
-        return _journals.FirstOrDefault(j => j.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase));
+        var journal = _journals.FirstOrDefault(j => j.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase));
+        return journal is null ? null : JournalExtensions.ToDto(journal);
     }
 }
