@@ -7,5 +7,8 @@ namespace EngineeringLogs.Api.Services
     {
         IEnumerable<JournalDto> GetJournals();
         JournalDto? GetJournalBySlug(string slug);
+        JournalDto CreateJournal(CreateJournalDto createJournalDto);
+        JournalDto? UpdateJournal(string slug, UpdateJournalDto updateJournalDto);
+        bool DeleteJournal(string slug);
     }
 }

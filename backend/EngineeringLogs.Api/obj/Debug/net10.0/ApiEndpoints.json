@@ -11,9 +11,62 @@
   },
   {
     "ContainingType": "EngineeringLogs.Api.Controllers.JournalsController",
+    "Method": "CreateJournal",
+    "RelativePath": "api/Journals",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createJournalDto",
+        "Type": "EngineeringLogs.Api.DTOs.Journals.CreateJournalDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EngineeringLogs.Api.Controllers.JournalsController",
     "Method": "GetJournalBySlug",
     "RelativePath": "api/Journals/{slug}",
     "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "slug",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EngineeringLogs.Api.Controllers.JournalsController",
+    "Method": "UpdateJournal",
+    "RelativePath": "api/Journals/{slug}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "slug",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "updateJournalDto",
+        "Type": "EngineeringLogs.Api.DTOs.Journals.UpdateJournalDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EngineeringLogs.Api.Controllers.JournalsController",
+    "Method": "DeleteJournal",
+    "RelativePath": "api/Journals/{slug}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
