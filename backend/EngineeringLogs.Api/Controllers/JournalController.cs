@@ -18,15 +18,15 @@ namespace EngineeringLogs.Api.Controllers
             _logger = logger;
         }
         [HttpGet]
-        public IActionResult GetJournals()
+        public async Task<IActionResult> GetJournals()
         {
-            return Ok(_journalService.GetJournals());
+            return Ok(await _journalService.GetJournalsAsync());
         }
 
         [HttpGet("{slug}")]
-        public IActionResult GetJournalBySlug(string slug)
+        public async Task<IActionResult> GetJournalBySlug(string slug)
         {
-            var journal = _journalService.GetJournalBySlug(slug);
+            var journal = await _journalService.GetJournalBySlugAsync(slug);
             if (journal == null)
             {
                 return NotFound();
@@ -35,28 +35,28 @@ namespace EngineeringLogs.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateJournal(CreateJournalDto createJournalDto)
+        public async Task<IActionResult> CreateJournal(CreateJournalDto createJournalDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var created = _journalService.CreateJournal(createJournalDto);
+            var created = await _journalService.CreateJournalAsync(createJournalDto);
             _logger.LogInformation("Created journal {Id} (slug: {Slug}) via API", created.Id, created.Slug);
 
             return CreatedAtAction(nameof(GetJournalBySlug), new { slug = created.Slug }, created);
         }
 
         [HttpPut("{slug}")]
-        public IActionResult UpdateJournal(string slug, UpdateJournalDto updateJournalDto)
+        public async Task<IActionResult> UpdateJournal(string slug, UpdateJournalDto updateJournalDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var updated = _journalService.UpdateJournal(slug, updateJournalDto);
+            var updated = await _journalService.UpdateJournalAsync(slug, updateJournalDto);
             if (updated == null)
             {
                 return NotFound();
@@ -68,9 +68,9 @@ namespace EngineeringLogs.Api.Controllers
         }
 
         [HttpDelete("{slug}")]
-        public IActionResult DeleteJournal(string slug)
+        public async Task<IActionResult> DeleteJournal(string slug)
         {
-            var deleted = _journalService.DeleteJournal(slug);
+            var deleted = await _journalService.DeleteJournalAsync(slug);
             if (!deleted)
             {
                 return NotFound();

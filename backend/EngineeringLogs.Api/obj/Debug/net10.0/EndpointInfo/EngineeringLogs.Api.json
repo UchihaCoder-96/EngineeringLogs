@@ -373,10 +373,12 @@
         "properties": {
           "title": {
             "maxLength": 200,
+            "minLength": 5,
             "type": "string"
           },
           "summary": {
             "maxLength": 1000,
+            "minLength": 10,
             "type": "string"
           },
           "tags": {

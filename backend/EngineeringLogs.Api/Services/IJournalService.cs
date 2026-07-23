@@ -5,10 +5,10 @@ namespace EngineeringLogs.Api.Services
 {
     public interface IJournalService
     {
-        IEnumerable<JournalDto> GetJournals();
-        JournalDto? GetJournalBySlug(string slug);
-        JournalDto CreateJournal(CreateJournalDto createJournalDto);
-        JournalDto? UpdateJournal(string slug, UpdateJournalDto updateJournalDto);
-        bool DeleteJournal(string slug);
+        Task<IEnumerable<JournalDto>> GetJournalsAsync();
+        Task<JournalDto?> GetJournalBySlugAsync(string slug);
+        Task<JournalDto> CreateJournalAsync(CreateJournalDto createJournalDto);
+        Task<JournalDto?> UpdateJournalAsync(string slug, UpdateJournalDto updateJournalDto);
+        Task<bool> DeleteJournalAsync(string slug);
     }
 }

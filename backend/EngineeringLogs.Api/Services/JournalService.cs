@@ -1,6 +1,8 @@
 ﻿using EngineeringLogs.Api.DTOs.Journals;
 using EngineeringLogs.Api.Extensions;
 using EngineeringLogs.Api.Models;
+using EngineeringLogs.Api.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace EngineeringLogs.Api.Services;
@@ -8,76 +10,29 @@ namespace EngineeringLogs.Api.Services;
 public class JournalService : IJournalService
 {
     private readonly ILogger<JournalService> _logger;
+    private readonly EngineeringLogsDbContext _context;
 
-    public JournalService(ILogger<JournalService> logger)
+    public JournalService(ILogger<JournalService> logger, EngineeringLogsDbContext context)
     {
         _logger = logger;
+        _context = context;
     }
-    private static readonly List<Journal> _journals = new()
+
+    public async Task<IEnumerable<JournalDto>> GetJournalsAsync()
     {
-        new Journal
-        {
-            Id = 1,
-            Title = "Created Python project for image processing",
-            Slug = "created-python-project-for-image-processing",
-            Date = new DateTime(2023, 4, 5),
-            Summary = "Made a Python project for image processing using OpenCV.",
-            Tags = new List<string>
-            {
-                "Python",
-                "Image Processing",
-                "OpenCV"
-            },
-            ProjectSlug = "image-processing-application"
-        },
-
-        new Journal
-        {
-            Id = 2,
-            Title = "Added UI elements to image processing application",
-            Slug = "added-ui-elements-to-image-processing-application",
-            Date = new DateTime(2023, 4, 6),
-            Summary = "Added UI elements to the image processing application using PyQt5.",
-            Tags = new List<string>
-            {
-                "Python",
-                "Image Processing",
-                "OpenCV"
-            },
-            ProjectSlug = "image-processing-application"
-        },
-
-        new Journal
-        {
-            Id = 3,
-            Title = "Added image filtering feature to image processing application",
-            Slug = "added-image-filtering-feature-to-image-processing-application",
-            Date = new DateTime(2023, 4, 7),
-            Summary = "Added image filtering feature to the image processing application using OpenCV and kernel algorithms.",
-            Tags = new List<string>
-            {
-                "Python",
-                "Image Processing",
-                "OpenCV"
-            },
-            ProjectSlug = "image-processing-application"
-        }
-    };
-
-    public IEnumerable<JournalDto> GetJournals()
-    {
-        return _journals.Select(JournalExtensions.ToDto);
+        var journals = await _context.Journals.ToListAsync();
+        return journals.Select(JournalExtensions.ToDto);
     }
-    public JournalDto? GetJournalBySlug(string slug)
+
+    public async Task<JournalDto?> GetJournalBySlugAsync(string slug)
     {
-        var journal = _journals.FirstOrDefault(j => j.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase));
+        var normalized = Utilities.EFStringComparisons.NormalizeForComparison(slug);
+        var journal = await _context.Journals.FirstOrDefaultAsync(j => j.Slug.ToLower() == normalized);
         return journal is null ? null : JournalExtensions.ToDto(journal);
     }
 
-    public JournalDto CreateJournal(CreateJournalDto createJournalDto)
+    public async Task<JournalDto> CreateJournalAsync(CreateJournalDto createJournalDto)
     {
-        var newId = _journals.Any() ? _journals.Max(j => j.Id) + 1 : 1;
-
         string GenerateSlug(string title)
         {
             var s = title?.ToLowerInvariant() ?? string.Empty;
@@ -89,15 +44,17 @@ public class JournalService : IJournalService
         var slug = GenerateSlug(createJournalDto.Title);
         var baseSlug = slug;
         var suffix = 1;
-        while (_journals.Any(j => j.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase)))
+        var normalized = Utilities.EFStringComparisons.NormalizeForComparison(slug);
+
+        while (await _context.Journals.AnyAsync(j => j.Slug.ToLower() == normalized))
         {
             suffix++;
             slug = $"{baseSlug}-{suffix}";
+            normalized = Utilities.EFStringComparisons.NormalizeForComparison(slug);
         }
 
         var journal = new Journal
         {
-            Id = newId,
             Title = createJournalDto.Title,
             Slug = slug,
             Date = DateTime.UtcNow,
@@ -106,15 +63,18 @@ public class JournalService : IJournalService
             ProjectSlug = createJournalDto.ProjectSlug
         };
 
-        _journals.Add(journal);
+        _context.Journals.Add(journal);
+        await _context.SaveChangesAsync();
+
         _logger.LogInformation("Created journal {Id} (slug: {Slug})", journal.Id, journal.Slug);
 
         return JournalExtensions.ToDto(journal);
     }
 
-    public JournalDto? UpdateJournal(string slug, UpdateJournalDto updateJournalDto)
+    public async Task<JournalDto?> UpdateJournalAsync(string slug, UpdateJournalDto updateJournalDto)
     {
-        var journal = _journals.FirstOrDefault(j => j.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase));
+        var normalized = Utilities.EFStringComparisons.NormalizeForComparison(slug);
+        var journal = await _context.Journals.FirstOrDefaultAsync(j => j.Slug.ToLower() == normalized);
         if (journal == null) return null;
 
         journal.Title = updateJournalDto.Title;
@@ -128,7 +88,8 @@ public class JournalService : IJournalService
         {
             var baseSlug2 = newSlug;
             var suffix2 = 1;
-            while (_journals.Any(j => j.Id != journal.Id && j.Slug.Equals(newSlug, StringComparison.OrdinalIgnoreCase)))
+            var newNormalized = Utilities.EFStringComparisons.NormalizeForComparison(newSlug);
+            while (await _context.Journals.AnyAsync(j => j.Id != journal.Id && j.Slug.ToLower() == newNormalized))
             {
                 suffix2++;
                 newSlug = $"{baseSlug2}-{suffix2}";
@@ -136,17 +97,22 @@ public class JournalService : IJournalService
             journal.Slug = newSlug;
         }
 
+        await _context.SaveChangesAsync();
+
         _logger.LogInformation("Updated journal {Id} (slug: {Slug})", journal.Id, journal.Slug);
 
         return JournalExtensions.ToDto(journal);
     }
 
-    public bool DeleteJournal(string slug)
+    public async Task<bool> DeleteJournalAsync(string slug)
     {
-        var journal = _journals.FirstOrDefault(j => j.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase));
+        var normalized = Utilities.EFStringComparisons.NormalizeForComparison(slug);
+        var journal = await _context.Journals.FirstOrDefaultAsync(j => j.Slug.ToLower() == normalized);
         if (journal == null) return false;
 
-        _journals.Remove(journal);
+        _context.Journals.Remove(journal);
+        await _context.SaveChangesAsync();
+
         _logger.LogInformation("Deleted journal {Id} (slug: {Slug})", journal.Id, slug);
         return true;
     }

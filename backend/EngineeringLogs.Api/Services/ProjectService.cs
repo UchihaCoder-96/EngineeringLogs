@@ -96,14 +96,14 @@ public class ProjectService : IProjectService
 
     public async Task<ProjectDto?> GetProjectBySlugAsync(string slug)
     {
-            // Normalize the incoming slug on the client side using invariant culture
-            // and compare against the database value converted to lower-case. This
-            // avoids using String.Equals with a StringComparison (which EF Core
-            // cannot translate) while keeping the comparison translatable to SQL.
-            var normalized = Utilities.EFStringComparisons.NormalizeForComparison(slug);
-            var project = await _context.Projects.FirstOrDefaultAsync(p => p.Slug.ToLower() == normalized);
+        // Normalize the incoming slug on the client side using invariant culture
+        // and compare against the database value converted to lower-case. This
+        // avoids using String.Equals with a StringComparison (which EF Core
+        // cannot translate) while keeping the comparison translatable to SQL.
+        var normalized = Utilities.EFStringComparisons.NormalizeForComparison(slug);
+        var project = await _context.Projects.FirstOrDefaultAsync(p => p.Slug.ToLower() == normalized);
 
-            return project is null ? null : ProjectExtensions.ToDto(project);
+        return project is null ? null : ProjectExtensions.ToDto(project);
     }
 
     public async Task<ProjectDto> CreateProjectAsync(CreateProjectDto createProjectDto)
@@ -147,8 +147,8 @@ public class ProjectService : IProjectService
 
     public async Task<ProjectDto?> UpdateProjectAsync(string slug, UpdateProjectDto updateProjectDto)
     {
-            var normalized = Utilities.EFStringComparisons.NormalizeForComparison(slug);
-            var project = await _context.Projects.FirstOrDefaultAsync(p => p.Slug.ToLower() == normalized);
+        var normalized = Utilities.EFStringComparisons.NormalizeForComparison(slug);
+        var project = await _context.Projects.FirstOrDefaultAsync(p => p.Slug.ToLower() == normalized);
         if (project == null) return null;
 
         project.Title = updateProjectDto.Title;
