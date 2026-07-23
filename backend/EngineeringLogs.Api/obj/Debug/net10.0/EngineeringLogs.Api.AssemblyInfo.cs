@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EngineeringLogs.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+12db9bd347993284a89a5d2e94f8a972d578aab6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0170eda16dbca128e40bc9ed96941565340137ee")]
 [assembly: System.Reflection.AssemblyProductAttribute("EngineeringLogs.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EngineeringLogs.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

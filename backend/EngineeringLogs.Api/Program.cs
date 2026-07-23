@@ -1,9 +1,9 @@
 using EngineeringLogs.Api.Services;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json.Serialization;
-using EngineeringLogs.Api.Data;
 using Microsoft.EntityFrameworkCore;
+using EngineeringLogs.Api.Data;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +38,11 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IJournalService, JournalService>();
+
+// Register DbContext
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+                       ?? "Host=localhost;Port=5432;Database=EngineeringLogs;Username=postgres;Password=b1d97fpostgresqladmin";
+builder.Services.AddDbContext<EngineeringLogsDbContext>(options => options.UseNpgsql(connectionString));
 
 builder.Services.AddDbContext<EngineeringLogsDbContext>(options =>
 {

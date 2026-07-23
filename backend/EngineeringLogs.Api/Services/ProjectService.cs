@@ -1,8 +1,10 @@
-﻿using EngineeringLogs.Api.DTOs.Projects;
+﻿using EngineeringLogs.Api.Data;
+using EngineeringLogs.Api.DTOs.Projects;
 using EngineeringLogs.Api.Extensions;
 using EngineeringLogs.Api.Models;
 using EngineeringLogs.Api.Models.Enums;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace EngineeringLogs.Api.Services;
 
@@ -10,14 +12,15 @@ public class ProjectService : IProjectService
 {
     private readonly ILogger<ProjectService> _logger;
 
-    public ProjectService(ILogger<ProjectService> logger)
+    public ProjectService(ILogger<ProjectService> logger, EngineeringLogsDbContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
-    private static readonly List<Project> _projects = new();
+    private readonly EngineeringLogsDbContext _context;
 
-    private static readonly List<Project> __projects = new()
+    private static readonly List<Project> _projects = new()
     {
         new Project
             {
@@ -85,27 +88,32 @@ public class ProjectService : IProjectService
                 Slug = "3d-multiplayer-game"
             }
     };
-    public IEnumerable<ProjectDto> GetProjects()
+    public async Task<IEnumerable<ProjectDto>> GetProjectsAsync()
     {
-        return _projects.Select(ProjectExtensions.ToDto);
+        var projects = await _context.Projects.ToListAsync();
+        return projects.Select(ProjectExtensions.ToDto);
     }
 
-    public ProjectDto? GetProjectBySlug(string slug)
+    public async Task<ProjectDto?> GetProjectBySlugAsync(string slug)
     {
-        var project = _projects.FirstOrDefault(p => p.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase));
-        return project is null ? null : ProjectExtensions.ToDto(project);
+            // Normalize the incoming slug on the client side using invariant culture
+            // and compare against the database value converted to lower-case. This
+            // avoids using String.Equals with a StringComparison (which EF Core
+            // cannot translate) while keeping the comparison translatable to SQL.
+            var normalized = Utilities.EFStringComparisons.NormalizeForComparison(slug);
+            var project = await _context.Projects.FirstOrDefaultAsync(p => p.Slug.ToLower() == normalized);
+
+            return project is null ? null : ProjectExtensions.ToDto(project);
     }
 
-    public ProjectDto CreateProject(CreateProjectDto createProjectDto)
+    public async Task<ProjectDto> CreateProjectAsync(CreateProjectDto createProjectDto)
     {
-        var newId = _projects.Any() ? _projects.Max(p => p.Id) + 1 : 1;
-
-        var slug = GenerateSlug(createProjectDto.Title);
-
-        // Ensure unique slug by appending a number if necessary
+        // Generate slug (normalized to lower-case) and ensure uniqueness in database
+        var slug = GenerateSlug(createProjectDto.Title).ToLowerInvariant();
         var baseSlug = slug;
         var suffix = 1;
-        while (_projects.Any(p => p.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase)))
+        // Compare with simple equality against the normalized slug so EF Core can translate to SQL
+        while (await _context.Projects.AnyAsync(p => p.Slug == slug))
         {
             suffix++;
             slug = $"{baseSlug}-{suffix}";
@@ -113,7 +121,6 @@ public class ProjectService : IProjectService
 
         var project = new Project
         {
-            Id = newId,
             Title = createProjectDto.Title,
             ShortDescription = createProjectDto.ShortDescription,
             Status = createProjectDto.Status,
@@ -130,16 +137,18 @@ public class ProjectService : IProjectService
             Slug = slug,
         };
 
-        _projects.Add(project);
+        _context.Projects.Add(project);
+        await _context.SaveChangesAsync();
 
         _logger.LogInformation("Created project {Id} (slug: {Slug})", project.Id, project.Slug);
 
         return ProjectExtensions.ToDto(project);
     }
 
-    public ProjectDto? UpdateProject(string slug, UpdateProjectDto updateProjectDto)
+    public async Task<ProjectDto?> UpdateProjectAsync(string slug, UpdateProjectDto updateProjectDto)
     {
-        var project = _projects.FirstOrDefault(p => p.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase));
+            var normalized = Utilities.EFStringComparisons.NormalizeForComparison(slug);
+            var project = await _context.Projects.FirstOrDefaultAsync(p => p.Slug.ToLower() == normalized);
         if (project == null) return null;
 
         project.Title = updateProjectDto.Title;
@@ -159,7 +168,8 @@ public class ProjectService : IProjectService
         {
             var baseSlug2 = newSlug;
             var suffix2 = 1;
-            while (_projects.Any(p => p.Id != project.Id && p.Slug.Equals(newSlug, StringComparison.OrdinalIgnoreCase)))
+            var normalizedNewSlug = Utilities.EFStringComparisons.NormalizeForComparison(newSlug);
+            while (await _context.Projects.AnyAsync(p => p.Id != project.Id && p.Slug.ToLower() == normalizedNewSlug))
             {
                 suffix2++;
                 newSlug = $"{baseSlug2}-{suffix2}";
@@ -167,17 +177,22 @@ public class ProjectService : IProjectService
             project.Slug = newSlug;
         }
 
+        await _context.SaveChangesAsync();
+
         _logger.LogInformation("Updated project {Id} (slug: {Slug})", project.Id, project.Slug);
 
         return ProjectExtensions.ToDto(project);
     }
 
-    public bool DeleteProject(string slug)
+    public async Task<bool> DeleteProjectAsync(string slug)
     {
-        var project = _projects.FirstOrDefault(p => p.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase));
+        var normalized = Utilities.EFStringComparisons.NormalizeForComparison(slug);
+        var project = await _context.Projects.FirstOrDefaultAsync(p => p.Slug.ToLower() == normalized);
         if (project == null) return false;
 
-        _projects.Remove(project);
+        _context.Projects.Remove(project);
+        await _context.SaveChangesAsync();
+
         _logger.LogInformation("Deleted project {Id} (slug: {Slug})", project.Id, slug);
         return true;
     }

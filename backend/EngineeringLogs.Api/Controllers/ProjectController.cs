@@ -19,15 +19,15 @@ namespace EngineeringLogs.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetProjects()
+        public async Task<IActionResult> GetProjects()
         {
-            return Ok(_projectService.GetProjects());
+            return Ok(await _projectService.GetProjectsAsync());
         }
 
         [HttpGet("{slug}")]
-        public IActionResult GetProjectBySlug(string slug)
+        public async Task<IActionResult> GetProjectBySlug(string slug)
         {
-            var project = _projectService.GetProjectBySlug(slug);
+            var project = await _projectService.GetProjectBySlugAsync(slug);
             if (project == null)
             {
                 return NotFound();
@@ -36,14 +36,14 @@ namespace EngineeringLogs.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateProject(CreateProjectDto createProjectDto)
+        public async Task<IActionResult> CreateProject(CreateProjectDto createProjectDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var created = _projectService.CreateProject(createProjectDto);
+            var created = await _projectService.CreateProjectAsync(createProjectDto);
 
             _logger.LogInformation("Created project {Id} (slug: {Slug}) via API", created.Id, created.Slug);
 
@@ -51,14 +51,14 @@ namespace EngineeringLogs.Api.Controllers
         }
 
         [HttpPut("{slug}")]
-        public IActionResult UpdateProject(string slug, UpdateProjectDto updateProjectDto)
+        public async Task<IActionResult> UpdateProject(string slug, UpdateProjectDto updateProjectDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var updated = _projectService.UpdateProject(slug, updateProjectDto);
+            var updated = await _projectService.UpdateProjectAsync(slug, updateProjectDto);
             if (updated == null)
             {
                 return NotFound();
@@ -70,9 +70,9 @@ namespace EngineeringLogs.Api.Controllers
         }
 
         [HttpDelete("{slug}")]
-        public IActionResult DeleteProject(string slug)
+        public async Task<IActionResult> DeleteProject(string slug)
         {
-            var deleted = _projectService.DeleteProject(slug);
+            var deleted = await _projectService.DeleteProjectAsync(slug);
             if (!deleted)
             {
                 return NotFound();

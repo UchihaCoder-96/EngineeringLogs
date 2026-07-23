@@ -5,10 +5,10 @@ namespace EngineeringLogs.Api.Services
 {
     public interface IProjectService
     {
-        IEnumerable<ProjectDto> GetProjects();
-        ProjectDto? GetProjectBySlug(string slug);
-        ProjectDto CreateProject(CreateProjectDto createProjectDto);
-        ProjectDto? UpdateProject(string slug, UpdateProjectDto updateProjectDto);
-        bool DeleteProject(string slug);
+        Task<IEnumerable<ProjectDto>> GetProjectsAsync();
+        Task<ProjectDto?> GetProjectBySlugAsync(string slug);
+        Task<ProjectDto> CreateProjectAsync(CreateProjectDto createProjectDto);
+        Task<ProjectDto?> UpdateProjectAsync(string slug, UpdateProjectDto updateProjectDto);
+        Task<bool> DeleteProjectAsync(string slug);
     }
 }
