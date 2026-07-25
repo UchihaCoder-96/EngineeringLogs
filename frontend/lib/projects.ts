@@ -20,3 +20,13 @@ export async function getProject(slug: string): Promise<Project> {
 
     return response.json();
 }
+
+export async function deleteProject(slug:string) {
+    const response = await fetch(`${API_BASE_URL}/api/projects/${slug}`, {
+        method: "DELETE",
+    });
+    if (!response.ok) {
+        throw new Error("[DELETE FETCH ERROR] Status: " + response.status);
+    }
+    return response;
+}

@@ -38,6 +38,7 @@ namespace EngineeringLogs.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateProject(CreateProjectDto createProjectDto)
         {
+            _logger.LogWarning("Attempting to create project {Slug} via API", createProjectDto.Title);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -53,6 +54,7 @@ namespace EngineeringLogs.Api.Controllers
         [HttpPut("{slug}")]
         public async Task<IActionResult> UpdateProject(string slug, UpdateProjectDto updateProjectDto)
         {
+            _logger.LogWarning("Attempting to update project {Slug} via API", slug);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -72,6 +74,7 @@ namespace EngineeringLogs.Api.Controllers
         [HttpDelete("{slug}")]
         public async Task<IActionResult> DeleteProject(string slug)
         {
+            _logger.LogWarning("Attempting to delete project {Slug} via API", slug);
             var deleted = await _projectService.DeleteProjectAsync(slug);
             if (!deleted)
             {

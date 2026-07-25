@@ -10,7 +10,8 @@ type JournalClientProps = {
 
 export default function JournalClient({
     journals,
-}: JournalClientProps) {
+    isAdmin = false
+}: JournalClientProps & { isAdmin?: boolean }) {
     const [query, setQuery] = useState("");
     const [selectedTag, setSelectedTag] = useState("All");
 
@@ -47,14 +48,40 @@ export default function JournalClient({
 
                 <div className="text-center">
 
-                    <h1 className="text-5xl font-bold">
-                        Developer Journal
-                    </h1>
+                    {!isAdmin && (
+                        <div>
+                            <h1 className="text-5xl font-bold">
+                                Developer Journal
+                            </h1>
 
-                    <p className="mx-auto mt-5 max-w-2xl text-lg text-zinc-400">
-                        A raw engineering log documenting what I build,
-                        what breaks, and what I learn every day.
-                    </p>
+                            <p className="mx-auto mt-5 max-w-2xl text-lg text-zinc-400">
+                                A raw engineering log documenting what I build,
+                                what breaks, and what I learn every day.
+                            </p>
+                        </div>
+                    )}
+                    {isAdmin && (
+
+                        <div className="mb-10 flex flex-col gap-4 md:flex md:items-center md:justify-between">
+                            <p className="mt-2 text-sm text-zinc-500">
+                                You are logged in as an admin. You can edit or delete journals.
+                            </p>
+                            <div>
+                                <h1 className="text-4xl font-bold">
+                                    Manage Journals
+                                </h1>
+
+                                <p className="mt-2 text-zinc-400">
+                                    Create, edit and organize your engineering journals.
+                                </p>
+                            </div>
+
+                            <button className="rounded-xl bg-blue-600 px-5 py-3 font-medium transition hover:bg-blue-500">
+                                + Add Journal
+                            </button>
+
+                        </div>
+                    )}
 
                 </div>
 
@@ -130,6 +157,21 @@ export default function JournalClient({
                         filteredJournals.map((journal) => (
                             <Fragment key={journal.id}>
                                 <JournalCard journal={journal} />
+                                { isAdmin && (
+                                    <div className="mt-3 flex gap-3">
+                                        <button
+                                            className="rounded-xl border border-blue-500 px-5 py-2 font-medium text-blue-400 transition hover:bg-blue-500 hover:text-white"
+                                        >
+                                            Edit
+                                        </button>
+
+                                        <button
+                                            className="rounded-xl border border-red-500 px-5 py-2 font-medium text-red-400 transition hover:bg-red-500 hover:text-white"
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                )}
                                 <br />
                             </Fragment>
                         ))
