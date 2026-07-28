@@ -27,6 +27,7 @@ namespace EngineeringLogs.Api.DTOs.Projects
         [Url]
         public string? DemoUrl { get; set; }
 
+        [Required]
         [MinLength(1)]
         public List<string> Technologies { get; set; } = new List<string>();
 
