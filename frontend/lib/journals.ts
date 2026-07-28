@@ -30,3 +30,13 @@ export async function getJournal(slug: string): Promise<Journal> {
         date: new Date(journal.date),
     };
 }
+
+export async function deleteJournal(slug:string) {
+    const response = await fetch(`${API_BASE_URL}/api/journals/${slug}`, {
+        method: "DELETE",
+    });
+    if (!response.ok) {
+        throw new Error("[DELETE FETCH ERROR] Status: " + response.status);
+    }
+    return response;
+}

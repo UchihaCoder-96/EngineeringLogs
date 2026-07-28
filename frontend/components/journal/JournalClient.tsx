@@ -3,6 +3,8 @@
 import { Fragment, useState } from "react";
 import JournalCard from "@/components/journal/JournalCard";
 import { Journal } from "@/types/journal";
+import { deleteJournal } from "@/lib/journals";
+import Link from "next/dist/client/link";
 
 type JournalClientProps = {
     journals: Journal[];
@@ -14,6 +16,17 @@ export default function JournalClient({
 }: JournalClientProps & { isAdmin?: boolean }) {
     const [query, setQuery] = useState("");
     const [selectedTag, setSelectedTag] = useState("All");
+    const [journalToDelete, setJournalToDelete] = useState<string | null>(null);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [dialog, setDialog] = useState<{
+        open: boolean;
+        title: string;
+        message: string;
+    }>({
+        open: false,
+        title: "",
+        message: "",
+    });
 
     const tags = [
         "All",
@@ -42,6 +55,33 @@ export default function JournalClient({
                 b.date.getTime() - a.date.getTime()
         );
 
+
+    async function handleDelete() {
+        if (!journalToDelete) return;
+        setIsDeleting(true);
+        try {
+            await deleteJournal(journalToDelete);
+
+            setDialog({
+                open: true,
+                title: "Journal Deleted",
+                message: "The journal was deleted successfully.",
+            });
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 1200);
+        } catch (error) {
+            setDialog({
+                open: true,
+                title: "Delete Failed",
+                message: "Couldn't delete the journal. Please try again.\n [EXCEPTION] " + (error as Error).message,
+            });
+        } finally {
+            setIsDeleting(false);
+            setJournalToDelete(null);
+        }
+    }
     return (
         <section className="min-h-screen bg-zinc-950 text-white">
             <div className="mx-auto max-w-5xl px-6 py-20">
@@ -76,9 +116,12 @@ export default function JournalClient({
                                 </p>
                             </div>
 
-                            <button className="rounded-xl bg-blue-600 px-5 py-3 font-medium transition hover:bg-blue-500">
-                                + Add Journal
-                            </button>
+                            <Link
+                                href="/admin/journals/new"
+                                className="rounded-xl bg-blue-600 px-5 py-2 font-medium text-white transition hover:bg-blue-500"
+                            >
+                                + New Journal
+                            </Link>
 
                         </div>
                     )}
@@ -159,13 +202,15 @@ export default function JournalClient({
                                 <JournalCard journal={journal} />
                                 { isAdmin && (
                                     <div className="mt-3 flex gap-3">
-                                        <button
+                                        <Link
+                                            href={`/admin/projects/${journal.slug}/edit`}
                                             className="rounded-xl border border-blue-500 px-5 py-2 font-medium text-blue-400 transition hover:bg-blue-500 hover:text-white"
                                         >
                                             Edit
-                                        </button>
+                                        </Link>
 
                                         <button
+                                            onClick={() => setJournalToDelete(journal.slug)}
                                             className="rounded-xl border border-red-500 px-5 py-2 font-medium text-red-400 transition hover:bg-red-500 hover:text-white"
                                         >
                                             Delete
@@ -192,6 +237,73 @@ export default function JournalClient({
                 </div>
 
             </div>
+            {journalToDelete && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+
+                    <div className="w-full max-w-md rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
+
+                        <h2 className="text-xl font-semibold text-white">
+                            Delete Journal?
+                        </h2>
+
+                        <p className="mt-3 text-zinc-400">
+                            This action cannot be undone.
+                        </p>
+
+                        <div className="mt-8 flex justify-end gap-3">
+
+                            <button
+                                onClick={() => setJournalToDelete(null)}
+                                disabled={isDeleting}
+                                className="rounded-xl border border-zinc-700 px-5 py-2 text-zinc-300 transition hover:bg-zinc-800"
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                onClick={handleDelete}
+                                disabled={isDeleting}
+                                className="rounded-xl bg-red-600 px-5 py-2 text-white transition hover:bg-red-500 disabled:opacity-50"
+                            >
+                                {isDeleting ? "Deleting..." : "Delete"}
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            )}
+            {dialog.open && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+
+                    <div className="w-full max-w-sm rounded-2xl border border-zinc-800 bg-zinc-900 p-6 text-center">
+
+                        <h2 className="text-xl font-semibold text-white">
+                            {dialog.title}
+                        </h2>
+
+                        <p className="mt-3 text-zinc-400">
+                            {dialog.message}
+                        </p>
+
+                        <button
+                            onClick={() =>
+                                setDialog({
+                                    open: false,
+                                    title: "",
+                                    message: "",
+                                })
+                            }
+                            className="mt-6 rounded-xl bg-blue-600 px-6 py-2 text-white transition hover:bg-blue-500"
+                        >
+                            OK
+                        </button>
+
+                    </div>
+
+                </div>
+            )}
         </section>
     );
 }
