@@ -44,7 +44,27 @@ export async function createProject(project: any) {
     });
 
     if (!response.ok) {
-        throw new Error("[CREATE FETCH ERROR] Status: " + response.status);
+        throw new Error("[POST FETCH ERROR] Status: " + response.status);
+    }
+
+    return response;
+}
+
+export async function updateProject(
+    slug: string,
+    project: any
+) {
+    const formattedProject = stripEmptyFields(project);
+    const response = await fetch(`${API_BASE_URL}/api/projects/${slug}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formattedProject),
+    });
+
+    if (!response.ok) {
+        throw new Error("[PUT FETCH ERROR] Status: " + response.status);
     }
 
     return response;

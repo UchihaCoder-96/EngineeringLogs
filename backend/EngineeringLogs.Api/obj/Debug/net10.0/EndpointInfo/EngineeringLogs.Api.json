@@ -302,6 +302,7 @@
           "shortDescription",
           "category",
           "difficulty",
+          "technologies",
           "status"
         ],
         "type": "object",
