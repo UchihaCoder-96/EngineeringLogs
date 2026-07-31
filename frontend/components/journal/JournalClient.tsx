@@ -304,6 +304,74 @@ export default function JournalClient({
 
                 </div>
             )}
+            
+            {journalToDelete && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+
+                    <div className="w-full max-w-md rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
+
+                        <h2 className="text-xl font-semibold text-white">
+                            Delete Journal?
+                        </h2>
+
+                        <p className="mt-3 text-zinc-400">
+                            This action cannot be undone.
+                        </p>
+
+                        <div className="mt-8 flex justify-end gap-3">
+
+                            <button
+                                onClick={() => setJournalToDelete(null)}
+                                disabled={isDeleting}
+                                className="rounded-xl border border-zinc-700 px-5 py-2 text-zinc-300 transition hover:bg-zinc-800"
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                onClick={handleDelete}
+                                disabled={isDeleting}
+                                className="rounded-xl bg-red-600 px-5 py-2 text-white transition hover:bg-red-500 disabled:opacity-50"
+                            >
+                                {isDeleting ? "Deleting..." : "Delete"}
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            )}
+            {dialog.open && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+
+                    <div className="w-full max-w-sm rounded-2xl border border-zinc-800 bg-zinc-900 p-6 text-center">
+
+                        <h2 className="text-xl font-semibold text-white">
+                            {dialog.title}
+                        </h2>
+
+                        <p className="mt-3 text-zinc-400">
+                            {dialog.message}
+                        </p>
+
+                        <button
+                            onClick={() =>
+                                setDialog({
+                                    open: false,
+                                    title: "",
+                                    message: "",
+                                })
+                            }
+                            className="mt-6 rounded-xl bg-blue-600 px-6 py-2 text-white transition hover:bg-blue-500"
+                        >
+                            OK
+                        </button>
+
+                    </div>
+
+                </div>
+            )}
         </section>
     );
 }
