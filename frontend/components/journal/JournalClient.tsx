@@ -203,7 +203,7 @@ export default function JournalClient({
                                 { isAdmin && (
                                     <div className="mt-3 flex gap-3">
                                         <Link
-                                            href={`/admin/projects/${journal.slug}/edit`}
+                                            href={`/admin/journals/${journal.slug}/edit`}
                                             className="rounded-xl border border-blue-500 px-5 py-2 font-medium text-blue-400 transition hover:bg-blue-500 hover:text-white"
                                         >
                                             Edit

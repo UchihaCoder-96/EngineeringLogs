@@ -1,7 +1,12 @@
+type SelectOption<T extends string> = {
+    label: string;
+    value: T;
+};
+
 type SelectFieldProps<T extends string> = {
     label: string;
     value: T;
-    options: readonly T[];
+    options: readonly (T | SelectOption<T>)[];
     onChange: (value: T) => void;
 };
 
@@ -22,14 +27,27 @@ export default function SelectField<T extends string>({
                 onChange={(e) => onChange(e.target.value as T)}
                 className="w-full rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3 transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30"
             >
-                {options.map((option) => (
-                    <option
-                        key={option}
-                        value={option}
-                    >
-                        {option}
-                    </option>
-                ))}
+                {options.map((option) => {
+                    if (typeof option === "string") {
+                        return (
+                            <option
+                                key={option}
+                                value={option}
+                            >
+                                {option}
+                            </option>
+                        );
+                    }
+
+                    return (
+                        <option
+                            key={option.value}
+                            value={option.value}
+                        >
+                            {option.label}
+                        </option>
+                    );
+                })}
             </select>
         </div>
     );
