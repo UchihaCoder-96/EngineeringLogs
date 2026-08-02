@@ -10,5 +10,6 @@ namespace EngineeringLogs.Api.Services
         Task<ProjectDto> CreateProjectAsync(CreateProjectDto createProjectDto);
         Task<ProjectDto?> UpdateProjectAsync(string slug, UpdateProjectDto updateProjectDto);
         Task<bool> DeleteProjectAsync(string slug);
+        Task<bool> IncrementViewCountAsync(string slug);
     }
 }

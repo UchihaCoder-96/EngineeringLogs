@@ -16,4 +16,5 @@ public class Journal
 
     public string? ProjectSlug { get; set; }
     public string Content { get; set; } = string.Empty;
+    public int ViewCount { get; set; }
 }

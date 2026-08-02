@@ -1,9 +1,9 @@
 import { getJournals } from "@/lib/journals";
-import JournalClient from "@/components/journal/JournalClient";
+import JournalsClient from "@/components/journal/JournalsClient";
 
 export default async function Page() {
     const journals = await getJournals();
     const isAdmin = true;
 
-    return <JournalClient journals={journals} isAdmin={isAdmin} />;
+    return <JournalsClient journals={journals} isAdmin={isAdmin} />;
 }

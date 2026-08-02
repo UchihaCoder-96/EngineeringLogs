@@ -95,6 +95,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "EngineeringLogs.Api.Controllers.JournalsController",
+    "Method": "IncrementViewCount",
+    "RelativePath": "api/Journals/{slug}/view",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "slug",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "EngineeringLogs.Api.Controllers.ProjectsController",
     "Method": "GetProjects",
     "RelativePath": "api/Projects",
@@ -162,6 +178,22 @@
     "Method": "DeleteProject",
     "RelativePath": "api/Projects/{slug}",
     "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "slug",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EngineeringLogs.Api.Controllers.ProjectsController",
+    "Method": "IncrementViewCount",
+    "RelativePath": "api/Projects/{slug}/view",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [

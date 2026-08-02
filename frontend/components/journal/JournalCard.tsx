@@ -48,19 +48,24 @@ export default function JournalCard({
                         ))}
                     </div>
                 )}
+                <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-zinc-800 pt-5">
 
-                <div className="mt-6 flex items-center justify-between border-t border-zinc-800 pt-5">
+                    <div className="flex items-center gap-2">
 
-                    <span className="text-sm text-zinc-500">
-                        Developer Journal
-                    </span>
+                        <span className="text-sm text-zinc-500">
+                            Developer Journal
+                        </span>
+
+                        <span className="text-sm text-zinc-500">
+                            👁 {journal.viewCount}
+                        </span>
+                    </div>
 
                     <span className="text-sm font-medium text-blue-400 opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100">
                         Read →
                     </span>
 
                 </div>
-
             </article>
         </Link>
     );

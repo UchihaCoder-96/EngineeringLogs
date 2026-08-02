@@ -206,4 +206,18 @@ public class ProjectService : IProjectService
         s = System.Text.RegularExpressions.Regex.Replace(s, "\\s+", "-").Trim('-');
         return s;
     }
+    public async Task<bool> IncrementViewCountAsync(string slug)
+    {
+        var normalized = Utilities.EFStringComparisons.NormalizeForComparison(slug);
+        var project = await _context.Projects.FirstOrDefaultAsync(p => p.Slug.ToLower() == normalized);
+
+        if (project is null)
+            return false;
+
+        project.ViewCount++;
+
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
 }

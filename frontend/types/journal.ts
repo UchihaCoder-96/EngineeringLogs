@@ -7,4 +7,5 @@ export type Journal = {
     content: string;
     tags: string[];
     projectSlug?: string;
+    viewCount: number;
 };

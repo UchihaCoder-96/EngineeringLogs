@@ -126,4 +126,18 @@ public class JournalService : IJournalService
         s = System.Text.RegularExpressions.Regex.Replace(s, "\\s+", "-").Trim('-');
         return s;
     }
+    public async Task<bool> IncrementViewCountAsync(string slug)
+    {
+        var normalized = Utilities.EFStringComparisons.NormalizeForComparison(slug);
+        var journal = await _context.Journals.FirstOrDefaultAsync(j => j.Slug.ToLower() == normalized);
+
+        if (journal is null)
+            return false;
+
+        journal.ViewCount++;
+
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
 }

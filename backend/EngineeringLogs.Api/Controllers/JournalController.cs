@@ -84,5 +84,16 @@ namespace EngineeringLogs.Api.Controllers
 
             return NoContent();
         }
+
+        [HttpPost("{slug}/view")]
+        public async Task<IActionResult> IncrementViewCount(string slug)
+        {
+            var success = await _journalService.IncrementViewCountAsync(slug);
+
+            if (!success)
+                return NotFound();
+
+            return NoContent();
+        }
     }
 }

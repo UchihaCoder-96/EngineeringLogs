@@ -10,5 +10,6 @@ namespace EngineeringLogs.Api.Services
         Task<JournalDto> CreateJournalAsync(CreateJournalDto createJournalDto);
         Task<JournalDto?> UpdateJournalAsync(string slug, UpdateJournalDto updateJournalDto);
         Task<bool> DeleteJournalAsync(string slug);
+        Task<bool> IncrementViewCountAsync(string slug);
     }
 }
