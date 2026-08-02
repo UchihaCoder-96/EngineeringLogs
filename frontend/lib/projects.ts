@@ -23,8 +23,12 @@ export async function getProject(slug: string): Promise<Project> {
 }
 
 export async function deleteProject(slug: string) {
+    const token = localStorage.getItem("token");
     const response = await fetch(`${API_BASE_URL}/api/projects/${slug}`, {
         method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
     });
     if (!response.ok) {
         throw new Error("[DELETE FETCH ERROR] Status: " + response.status);
@@ -34,11 +38,13 @@ export async function deleteProject(slug: string) {
 
 export async function createProject(project: any) {
     const formattedProject = stripEmptyFields(project);
+    const token = localStorage.getItem("token");
 
     const response = await fetch(`${API_BASE_URL}/api/projects`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(formattedProject),
     });
@@ -55,10 +61,13 @@ export async function updateProject(
     project: any
 ) {
     const formattedProject = stripEmptyFields(project);
+    const token = localStorage.getItem("token");
+    
     const response = await fetch(`${API_BASE_URL}/api/projects/${slug}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(formattedProject),
     });

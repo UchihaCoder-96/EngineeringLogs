@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EngineeringLogs.Api.Data;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,16 +41,15 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IJournalService, JournalService>();
+builder.Services.AddScoped<IJwtService, JwtService>();
 
 // Register DbContext
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-                       ?? "Host=localhost;Port=5432;Database=EngineeringLogs;Username=postgres;Password=b1d97fpostgresqladmin";
-builder.Services.AddDbContext<EngineeringLogsDbContext>(options => options.UseNpgsql(connectionString));
+var connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
 
 builder.Services.AddDbContext<EngineeringLogsDbContext>(options =>
 {
     options.UseNpgsql(
-        builder.Configuration.GetConnectionString("DefaultConnection")
+        connectionString
     );
 });
 builder.Services.AddCors(options =>
@@ -59,6 +61,27 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)
+            )
+        };
+    });
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -95,6 +118,7 @@ if (app.Environment.IsDevelopment())
 
 // app.UseHttpsRedirection();
 app.UseCors("Frontend");
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

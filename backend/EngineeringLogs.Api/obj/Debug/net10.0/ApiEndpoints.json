@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "EngineeringLogs.Api.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "EngineeringLogs.Api.DTOs.Auth.LoginRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "EngineeringLogs.Api.Controllers.JournalsController",
     "Method": "GetJournals",
     "RelativePath": "api/Journals",

@@ -1,5 +1,6 @@
 ﻿using EngineeringLogs.Api.DTOs.Journals;
 using EngineeringLogs.Api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -35,6 +36,7 @@ namespace EngineeringLogs.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateJournal(CreateJournalDto createJournalDto)
         {
             if (!ModelState.IsValid)
@@ -49,6 +51,7 @@ namespace EngineeringLogs.Api.Controllers
         }
 
         [HttpPut("{slug}")]
+        [Authorize]
         public async Task<IActionResult> UpdateJournal(string slug, UpdateJournalDto updateJournalDto)
         {
             if (!ModelState.IsValid)
@@ -68,6 +71,7 @@ namespace EngineeringLogs.Api.Controllers
         }
 
         [HttpDelete("{slug}")]
+        [Authorize]
         public async Task<IActionResult> DeleteJournal(string slug)
         {
             var deleted = await _journalService.DeleteJournalAsync(slug);

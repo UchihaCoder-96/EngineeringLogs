@@ -1,5 +1,6 @@
 ﻿using EngineeringLogs.Api.DTOs.Projects;
 using EngineeringLogs.Api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -36,6 +37,7 @@ namespace EngineeringLogs.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateProject(CreateProjectDto createProjectDto)
         {
             _logger.LogWarning("Attempting to create project {Slug} via API", createProjectDto.Title);
@@ -52,6 +54,7 @@ namespace EngineeringLogs.Api.Controllers
         }
 
         [HttpPut("{slug}")]
+        [Authorize]
         public async Task<IActionResult> UpdateProject(string slug, UpdateProjectDto updateProjectDto)
         {
             _logger.LogWarning("Attempting to update project {Slug} via API", slug);
@@ -72,6 +75,7 @@ namespace EngineeringLogs.Api.Controllers
         }
 
         [HttpDelete("{slug}")]
+        [Authorize]
         public async Task<IActionResult> DeleteProject(string slug)
         {
             _logger.LogWarning("Attempting to delete project {Slug} via API", slug);
