@@ -1,7 +1,6 @@
-import { stripEmptyFields } from "@/utils/Utility";
+import { stripEmptyFields, getAuthHeaders } from "@/utils/Utility";
 import API_BASE_URL from "./api";
 import { Journal } from "@/types/journal";
-import { journals } from "@/data/journal";
 
 export async function getJournals(): Promise<Journal[]> {
     const response = await fetch(`${API_BASE_URL}/api/journals`);
@@ -34,12 +33,9 @@ export async function getJournal(slug: string): Promise<Journal> {
 }
 
 export async function deleteJournal(slug:string) {
-    const token = localStorage.getItem("token");
     const response = await fetch(`${API_BASE_URL}/api/journals/${slug}`, {
         method: "DELETE",
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
+        headers: getAuthHeaders(),
     });
     if (!response.ok) {
         throw new Error("[DELETE FETCH ERROR] Status: " + response.status);
@@ -49,14 +45,10 @@ export async function deleteJournal(slug:string) {
 
 export async function createJournal(journal: any) {
     const formattedJournal = stripEmptyFields(journal);
-    const token = localStorage.getItem("token");
 
     const response = await fetch(`${API_BASE_URL}/api/journals`, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        },
+        headers: getAuthHeaders(),
         body: JSON.stringify(formattedJournal),
     });
 
@@ -72,14 +64,10 @@ export async function updateJournal(
     journal: any
 ) {
     const formattedJournal = stripEmptyFields(journal);
-    const token = localStorage.getItem("token");
-    
+
     const response = await fetch(`${API_BASE_URL}/api/journals/${slug}`, {
         method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        },
+        headers: getAuthHeaders(),
         body: JSON.stringify(formattedJournal),
     });
 
@@ -89,3 +77,4 @@ export async function updateJournal(
 
     return response;
 }
+

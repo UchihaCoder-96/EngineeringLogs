@@ -35,5 +35,7 @@ namespace EngineeringLogs.Api.DTOs.Projects
 
         [Url]
         public string? Thumbnail { get; set; } //Url
+        [Required]
+        public string Content { get; set; } = string.Empty;
     }
 }

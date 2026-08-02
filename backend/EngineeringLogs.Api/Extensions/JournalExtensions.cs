@@ -16,6 +16,7 @@ namespace EngineeringLogs.Api.Extensions
                 Tags = journal.Tags,
                 ProjectSlug = journal.ProjectSlug,
                 Slug = journal.Slug,
+                Content = journal.Content
             };
         }
     }

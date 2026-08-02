@@ -20,7 +20,8 @@ namespace EngineeringLogs.Api.Extensions
                 GithubUrl = project.GithubUrl,
                 DemoUrl = project.DemoUrl,
                 Thumbnail = project.Thumbnail,
-                Technologies = project.Technologies
+                Technologies = project.Technologies,
+                Content = project.Content
             };
         }
     }

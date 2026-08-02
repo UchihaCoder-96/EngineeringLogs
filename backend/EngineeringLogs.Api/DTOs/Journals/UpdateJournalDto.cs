@@ -18,5 +18,7 @@ namespace EngineeringLogs.Api.DTOs.Journals
         public List<string> Tags { get; set; } = new List<string>();
 
         public string? ProjectSlug { get; set; }
+        [Required]
+        public string Content { get; set; } = string.Empty;
     }
 }

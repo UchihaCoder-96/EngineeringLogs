@@ -135,6 +135,7 @@ public class ProjectService : IProjectService
             Difficulty = createProjectDto.Difficulty,
             ViewCount = 0,
             Slug = slug,
+            Content = createProjectDto.Content ?? string.Empty,
         };
 
         _context.Projects.Add(project);
@@ -161,6 +162,7 @@ public class ProjectService : IProjectService
         project.Technologies = updateProjectDto.Technologies ?? new List<string>();
         project.Thumbnail = updateProjectDto.Thumbnail ?? string.Empty;
         project.LastUpdated = DateTime.UtcNow;
+        project.Content = updateProjectDto.Content;
 
         // If title changed, regenerate slug and ensure uniqueness
         var newSlug = GenerateSlug(project.Title);

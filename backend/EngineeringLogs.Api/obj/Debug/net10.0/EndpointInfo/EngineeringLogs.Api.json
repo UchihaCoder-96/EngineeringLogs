@@ -299,7 +299,8 @@
       "CreateJournalDto": {
         "required": [
           "title",
-          "summary"
+          "summary",
+          "content"
         ],
         "type": "object",
         "properties": {
@@ -325,6 +326,9 @@
               "null",
               "string"
             ]
+          },
+          "content": {
+            "type": "string"
           }
         }
       },
@@ -335,7 +339,8 @@
           "category",
           "difficulty",
           "technologies",
-          "status"
+          "status",
+          "content"
         ],
         "type": "object",
         "properties": {
@@ -385,6 +390,9 @@
               "string"
             ],
             "format": "uri"
+          },
+          "content": {
+            "type": "string"
           }
         }
       },
@@ -415,7 +423,8 @@
       "UpdateJournalDto": {
         "required": [
           "title",
-          "summary"
+          "summary",
+          "content"
         ],
         "type": "object",
         "properties": {
@@ -441,6 +450,9 @@
               "null",
               "string"
             ]
+          },
+          "content": {
+            "type": "string"
           }
         }
       },
@@ -450,7 +462,8 @@
           "shortDescription",
           "category",
           "difficulty",
-          "status"
+          "status",
+          "content"
         ],
         "type": "object",
         "properties": {
@@ -500,6 +513,9 @@
               "string"
             ],
             "format": "uri"
+          },
+          "content": {
+            "type": "string"
           }
         }
       }

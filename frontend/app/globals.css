@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
   --background: #ffffff;
@@ -23,4 +24,30 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.prose pre {
+    @apply rounded-2xl border border-zinc-800 bg-zinc-900 p-5 overflow-x-auto;
+}
+
+.prose code {
+    @apply text-blue-300;
+}
+
+.prose img {
+    @apply rounded-xl border border-zinc-800 shadow-lg;
+}
+
+.prose blockquote {
+    @apply border-l-4 border-blue-500 italic text-zinc-300;
+}
+
+.prose table {
+    @apply w-full border-collapse;
+}
+
+.prose th,
+.prose td {
+    @apply border border-zinc-700 px-4 py-2;
 }

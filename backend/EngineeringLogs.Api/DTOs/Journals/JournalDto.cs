@@ -9,5 +9,6 @@
         public List<string> Tags { get; set; } = new List<string>();
         public string? ProjectSlug { get; set; } = string.Empty;
         public string Slug { get; set; } = string.Empty;
+        public string Content { get; set; } = string.Empty;
     }
 }

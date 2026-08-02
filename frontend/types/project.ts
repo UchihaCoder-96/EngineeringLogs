@@ -28,6 +28,7 @@ export type Project = {
     id: number;
     title: string;
     shortDescription: string;
+    content: string;
     status: ProjectStatus;
     technologies: string[];
     featuredOrder?: number;
@@ -45,12 +46,13 @@ export type Project = {
 export type CreateProjectRequest = {
     title: string;
     shortDescription: string;
+    content: string;
     category: ProjectCategory;
     difficulty: ProjectDifficulty;
     status: ProjectStatus;
-    githubUrl?: string;
-    demoUrl?: string;
-    thumbnail?: string;
+    githubUrl: string;
+    demoUrl: string;
+    thumbnail: string;
     technologies: string[];
 };
 

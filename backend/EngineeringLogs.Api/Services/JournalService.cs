@@ -60,7 +60,8 @@ public class JournalService : IJournalService
             Date = DateTime.UtcNow,
             Summary = createJournalDto.Summary,
             Tags = createJournalDto.Tags ?? new List<string>(),
-            ProjectSlug = createJournalDto.ProjectSlug
+            ProjectSlug = createJournalDto.ProjectSlug,
+            Content = createJournalDto.Content
         };
 
         _context.Journals.Add(journal);
@@ -81,6 +82,7 @@ public class JournalService : IJournalService
         journal.Summary = updateJournalDto.Summary;
         journal.Tags = updateJournalDto.Tags ?? new List<string>();
         journal.ProjectSlug = updateJournalDto.ProjectSlug;
+        journal.Content = updateJournalDto.Content;
 
         // regenerate slug if title changed
         var newSlug = GenerateSlug(updateJournalDto.Title);

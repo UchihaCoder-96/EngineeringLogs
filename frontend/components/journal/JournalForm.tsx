@@ -13,6 +13,7 @@ import TextField from "@/components/form/TextField";
 export type CreateJournalRequest = {
     title: string;
     summary: string;
+    content: string;
     tags: string[];
     projectSlug?: string;
 };
@@ -32,6 +33,7 @@ export default function JournalForm({
 }: JournalFormProps) {
     const [title, setTitle] = useState("");
     const [summary, setSummary] = useState("");
+    const [content, setContent] = useState("");
     const [tags, setTags] = useState<string[]>([]);
     const [projectSlug, setProjectSlug] = useState("");
 
@@ -42,6 +44,7 @@ export default function JournalForm({
 
         setTitle(initialData.title ?? "");
         setSummary(initialData.summary ?? "");
+        setContent(initialData.content ?? "");
         setTags(initialData.tags ?? []);
         setProjectSlug(initialData.projectSlug ?? "");
     }, [initialData]);
@@ -55,6 +58,7 @@ export default function JournalForm({
             const journal: CreateJournalRequest = {
                 title,
                 summary,
+                content,
                 tags,
             };
 
@@ -85,6 +89,15 @@ export default function JournalForm({
                 label="Summary"
                 value={summary}
                 onChange={setSummary}
+                rows={6}
+                required
+                placeholder="Describe today's progress..."
+            />
+
+            <TextArea
+                label="Content"
+                value={content}
+                onChange={setContent}
                 rows={6}
                 required
                 placeholder="Describe today's progress..."

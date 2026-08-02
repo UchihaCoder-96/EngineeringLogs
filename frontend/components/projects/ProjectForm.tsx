@@ -20,6 +20,7 @@ type ProjectFormProps = {
     onSubmit: (project: {
         title: string;
         shortDescription: string;
+        content: string;
         category: Project["category"];
         difficulty: Project["difficulty"];
         status: Project["status"];
@@ -38,6 +39,10 @@ export default function ProjectForm({
     const [title, setTitle] = useState(initialData?.title ?? "");
     const [description, setDescription] = useState(
         initialData?.shortDescription ?? ""
+    );
+
+    const [content, setContent] = useState(
+        initialData?.content ?? ""
     );
 
     const [category, setCategory] = useState<Project["category"]>(
@@ -80,6 +85,7 @@ export default function ProjectForm({
             await onSubmit({
                 title,
                 shortDescription: description,
+                content,
                 category,
                 difficulty,
                 status,
@@ -109,6 +115,13 @@ export default function ProjectForm({
                 label="Short Description"
                 value={description}
                 onChange={setDescription}
+                required
+            />
+
+            <TextArea
+                label="Content"
+                value={content}
+                onChange={setContent}
                 required
             />
 

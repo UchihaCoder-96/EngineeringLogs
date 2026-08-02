@@ -4,6 +4,7 @@ export type Journal = {
     slug: string;
     date: Date;
     summary: string;
+    content: string;
     tags: string[];
     projectSlug?: string;
 };

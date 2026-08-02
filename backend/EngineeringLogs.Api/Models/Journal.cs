@@ -15,4 +15,5 @@ public class Journal
     public List<string> Tags { get; set; } = new List<string>();
 
     public string? ProjectSlug { get; set; }
+    public string Content { get; set; } = string.Empty;
 }

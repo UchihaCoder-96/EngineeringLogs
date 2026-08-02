@@ -69,7 +69,7 @@ namespace EngineeringLogs.Api.Controllers
                 return NotFound();
             }
 
-            _logger.LogInformation("Updated project {Slug} via API", slug);
+            _logger.LogInformation("Updated project {Slug} via API", updateProjectDto.Content);
 
             return Ok(updated);
         }

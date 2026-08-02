@@ -1,6 +1,11 @@
-//import { journals } from "@/data/journal";
 import { notFound } from "next/navigation";
 import { getJournal } from "@/lib/journals";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeRaw from "rehype-raw";
+import rehypeHighlight from "rehype-highlight";
+import rehypeKatex from "rehype-katex";
 
 export default async function Page({
     params,
@@ -10,7 +15,6 @@ export default async function Page({
     const { slug } = await params;
 
     const journal = await getJournal(slug);
-    // const journal = journals.find((j) => j.slug === slug);
 
     if (!journal) {
         notFound();
@@ -18,12 +22,23 @@ export default async function Page({
 
     return (
         <section className="bg-zinc-950 text-white">
-            <div className="mx-auto max-w-6xl px-6 py-32 text-center">
-                <h1 className="text-2xl font-bold sm:text-3xl md:text-4xl">
+            <div className="mx-auto max-w-6xl px-6 py-32">
+                <h1 className="text-5xl font-bold">
                     {journal.title}
                 </h1>
-                <div className="mt-6 text-lg text-zinc-300">
-                    <p>{journal.summary}</p>
+
+                <p className="mt-6 text-xl text-zinc-400">
+                    {journal.summary}
+                </p>
+
+                <hr className="my-12 border-zinc-800" />
+                <div className="prose prose-invert prose-lg max-w-none">
+                    <ReactMarkdown
+                        remarkPlugins={[remarkGfm, remarkMath]}
+                        rehypePlugins={[rehypeRaw, rehypeHighlight, rehypeKatex]}
+                    >
+                        {journal.content}
+                    </ReactMarkdown>
                 </div>
             </div>
         </section>

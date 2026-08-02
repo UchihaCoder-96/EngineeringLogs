@@ -1,6 +1,6 @@
 import API_BASE_URL from "./api";
 import { Project } from "@/types/project";
-import { stripEmptyFields } from "@/utils/Utility";
+import { stripEmptyFields, getAuthHeaders } from "@/utils/Utility";
 
 export async function getProjects(): Promise<Project[]> {
     const response = await fetch(`${API_BASE_URL}/api/projects`);
@@ -23,12 +23,9 @@ export async function getProject(slug: string): Promise<Project> {
 }
 
 export async function deleteProject(slug: string) {
-    const token = localStorage.getItem("token");
     const response = await fetch(`${API_BASE_URL}/api/projects/${slug}`, {
         method: "DELETE",
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
+        headers: getAuthHeaders()
     });
     if (!response.ok) {
         throw new Error("[DELETE FETCH ERROR] Status: " + response.status);
@@ -38,14 +35,10 @@ export async function deleteProject(slug: string) {
 
 export async function createProject(project: any) {
     const formattedProject = stripEmptyFields(project);
-    const token = localStorage.getItem("token");
 
     const response = await fetch(`${API_BASE_URL}/api/projects`, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        },
+        headers: getAuthHeaders(),
         body: JSON.stringify(formattedProject),
     });
 
@@ -61,14 +54,10 @@ export async function updateProject(
     project: any
 ) {
     const formattedProject = stripEmptyFields(project);
-    const token = localStorage.getItem("token");
     
     const response = await fetch(`${API_BASE_URL}/api/projects/${slug}`, {
         method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        },
+        headers: getAuthHeaders(),
         body: JSON.stringify(formattedProject),
     });
 

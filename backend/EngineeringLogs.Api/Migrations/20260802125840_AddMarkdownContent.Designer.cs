@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using EngineeringLogs.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EngineeringLogs.Api.Migrations
 {
     [DbContext(typeof(EngineeringLogsDbContext))]
-    partial class EngineeringLogsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260802125840_AddMarkdownContent")]
+    partial class AddMarkdownContent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
