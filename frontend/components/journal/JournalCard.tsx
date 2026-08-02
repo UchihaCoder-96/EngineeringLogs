@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Journal } from "@/types/journal";
+import { EyeIcon } from "lucide-react";
 
 export default function JournalCard({
     journal,
@@ -55,12 +56,13 @@ export default function JournalCard({
                         <span className="text-sm text-zinc-500">
                             Developer Journal
                         </span>
-
+                        &emsp;
                         <span className="text-sm text-zinc-500">
-                            👁 {journal.viewCount}
+                            <EyeIcon className="inline-block h-4 w-4" /> &ensp;
+                            {journal.viewCount}
                         </span>
                     </div>
-
+                
                     <span className="text-sm font-medium text-blue-400 opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100">
                         Read →
                     </span>

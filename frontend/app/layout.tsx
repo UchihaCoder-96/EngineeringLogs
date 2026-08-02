@@ -6,6 +6,61 @@ import Footer from "@/components/layout/Footer";
 import "highlight.js/styles/github-dark.css";
 import "katex/dist/katex.min.css";
 
+export const metadata: Metadata = {
+    metadataBase: new URL("https://engineeringlogs.com"),
+
+    title: {
+        default: "Engineering Logs",
+        template: "%s | Engineering Logs",
+    },
+
+    description:
+        "Engineering projects, development journals and technical articles documenting my engineering journey.",
+
+    keywords: [
+        "engineering",
+        "robotics",
+        "programming",
+        "game development",
+        "electronics",
+        "portfolio",
+        "engineering logs",
+    ],
+
+    authors: [
+        {
+            name: "Uwuchiha san",
+        },
+    ],
+
+    creator: "Uwuchiha san",
+
+    applicationName: "Engineering Logs",
+
+    openGraph: {
+        type: "website",
+        siteName: "Engineering Logs",
+        title: "Engineering Logs",
+        description:
+            "Engineering projects and development journals.",
+        images: [
+            "/og-image.png",
+        ],
+    },
+
+    twitter: {
+        card: "summary_large_image",
+        title: "Engineering Logs",
+        description:
+            "Engineering projects and journals.",
+        images: ["/og-image.png"],
+    },
+
+    robots: {
+        index: true,
+        follow: true,
+    },
+};
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -15,11 +70,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
-export const metadata: Metadata = {
-  title: "My Engineering Logs",
-  description: "Akkad bakkad bambe bol ^-^",
-};
 
 export default function RootLayout({
   children,

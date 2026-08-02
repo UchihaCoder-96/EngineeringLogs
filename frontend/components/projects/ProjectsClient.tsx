@@ -10,6 +10,7 @@ import {
     ProjectStatus,
 } from "@/types/project";
 import Link from "next/dist/client/link";
+import { Search } from "lucide-react";
 import { deleteProject } from "@/lib/projects";
 
 type ProjectsClientProps = {
@@ -131,52 +132,62 @@ export default function ProjectsClient({
 
                     <div className="flex flex-col gap-4 lg:flex-row">
 
-                        <input
-                            type="text"
-                            placeholder="🔍 Search projects..."
-                            value={query}
-                            onChange={(e) => setQuery(e.target.value)}
-                            className="
-                        flex-1
-                        rounded-xl
-                        border
-                        border-zinc-700
-                        bg-zinc-950
-                        px-5
-                        py-3
-                        text-white
-                        placeholder:text-zinc-500
-                        transition
-                        focus:border-blue-500
-                        focus:outline-none
-                        focus:ring-2
-                        focus:ring-blue-500/30
-                    "
-                        />
+    <div className="relative flex-1">
 
-                        <button
-                            onClick={() => {
-                                setQuery("");
-                                setCategory("all");
-                                setStatus("all");
-                                setDifficulty("all");
-                            }}
-                            className="
-                        rounded-xl
-                        border
-                        border-zinc-700
-                        bg-zinc-800
-                        px-6
-                        py-3
-                        text-zinc-300
-                        transition
-                        hover:bg-zinc-700
-                    "
-                        >
-                            Reset Filters
-                        </button>
+        <Search
+            size={18}
+            className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"
+        />
 
-                    </div>
+        <input
+            type="text"
+            placeholder="Search projects..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="
+                w-full
+                rounded-xl
+                border
+                border-zinc-700
+                bg-zinc-950
+                py-3
+                pl-12
+                pr-5
+                text-white
+                placeholder:text-zinc-500
+                transition
+                focus:border-blue-500
+                focus:outline-none
+                focus:ring-2
+                focus:ring-blue-500/30
+            "
+        />
+
+    </div>
+
+    <button
+        onClick={() => {
+            setQuery("");
+            setCategory("all");
+            setStatus("all");
+            setDifficulty("all");
+        }}
+        className="
+            rounded-xl
+            border
+            border-zinc-700
+            bg-zinc-800
+            px-6
+            py-3
+            text-zinc-300
+            transition
+            hover:bg-zinc-700
+        "
+    >
+        Reset Filters
+    </button>
+
+</div>
 
                     <div className="mt-6 grid gap-5 md:grid-cols-3">
 

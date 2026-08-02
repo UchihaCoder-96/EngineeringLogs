@@ -5,6 +5,7 @@ import JournalCard from "@/components/journal/JournalCard";
 import { Journal } from "@/types/journal";
 import { deleteJournal } from "@/lib/journals";
 import Link from "next/dist/client/link";
+import { Search } from "lucide-react";
 
 type JournalsClientProps = {
     journals: Journal[];
@@ -130,28 +131,20 @@ export default function JournalsClient({
 
                 <div className="mt-12">
 
-                    <input
-                        type="text"
-                        placeholder="🔍 Search journal entries..."
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                        className="
-                            w-full
-                            rounded-xl
-                            border
-                            border-zinc-700
-                            bg-zinc-900
-                            px-5
-                            py-3
-                            text-white
-                            placeholder:text-zinc-500
-                            transition
-                            focus:border-blue-500
-                            focus:outline-none
-                            focus:ring-2
-                            focus:ring-blue-500/30
-                        "
-                    />
+                    <div className="relative">
+                        <Search
+                            className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"
+                            size={20}
+                        />
+
+                        <input
+                            type="text"
+                            placeholder="Search journal entries..."
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            className="w-full rounded-xl border border-zinc-800 bg-zinc-900 py-3 pl-12 pr-4 text-white placeholder:text-zinc-500 focus:border-blue-500 focus:outline-none"
+                        />
+                    </div>
 
                 </div>
 
@@ -167,10 +160,9 @@ export default function JournalsClient({
                                 py-2
                                 text-sm
                                 transition
-                                ${
-                                    selectedTag === tag
-                                        ? "bg-blue-600 text-white"
-                                        : "bg-zinc-900 text-zinc-400 hover:bg-zinc-800"
+                                ${selectedTag === tag
+                                    ? "bg-blue-600 text-white"
+                                    : "bg-zinc-900 text-zinc-400 hover:bg-zinc-800"
                                 }
                             `}
                         >
@@ -200,7 +192,7 @@ export default function JournalsClient({
                         filteredJournals.map((journal) => (
                             <Fragment key={journal.id}>
                                 <JournalCard journal={journal} />
-                                { isAdmin && (
+                                {isAdmin && (
                                     <div className="mt-3 flex gap-3">
                                         <Link
                                             href={`/admin/journals/${journal.slug}/edit`}
@@ -304,7 +296,7 @@ export default function JournalsClient({
 
                 </div>
             )}
-            
+
             {journalToDelete && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
 

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { FolderGit2, NotebookPen } from "lucide-react";
 
 export default function Page() {
     const router = useRouter();
@@ -26,7 +27,7 @@ export default function Page() {
             </div>
         );
     }
-    
+
     /*
     function logout() {
         localStorage.removeItem("token");
@@ -54,8 +55,9 @@ export default function Page() {
 
                         <div className="flex items-center gap-4">
 
-                            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-500/10 text-3xl">
-                                📁
+
+                            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-400">
+                                <FolderGit2 size={28} />
                             </div>
 
                             <div>
@@ -88,8 +90,8 @@ export default function Page() {
 
                         <div className="flex items-center gap-4">
 
-                            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-500/10 text-3xl">
-                                📖
+                            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-400">
+                                <NotebookPen size={28} />
                             </div>
 
                             <div>

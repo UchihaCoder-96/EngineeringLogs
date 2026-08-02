@@ -37,5 +37,8 @@ namespace EngineeringLogs.Api.DTOs.Projects
         public string? Thumbnail { get; set; } //Url
         [Required]
         public string Content { get; set; } = string.Empty;
+
+        [Range(0, 100)]
+        public int? FeaturedOrder { get; set; }
     }
 }

@@ -28,6 +28,7 @@ type ProjectFormProps = {
         demoUrl: string;
         thumbnail: string;
         technologies: string[];
+        featuredOrder: number;
     }) => Promise<void>;
 };
 
@@ -74,6 +75,10 @@ export default function ProjectForm({
         initialData?.technologies ?? []
     );
 
+    const [featuredOrder, setFeaturedOrder] = useState<number>(
+        initialData?.featuredOrder ?? 0
+    );
+
     const [loading, setLoading] = useState(false);
 
     async function handleSubmit(e: React.FormEvent) {
@@ -93,6 +98,7 @@ export default function ProjectForm({
                 demoUrl,
                 thumbnail,
                 technologies,
+                featuredOrder,
             });
         } finally {
             setLoading(false);
@@ -114,6 +120,7 @@ export default function ProjectForm({
             <TextArea
                 label="Short Description"
                 value={description}
+                rows={6}
                 onChange={setDescription}
                 required
             />
@@ -121,6 +128,7 @@ export default function ProjectForm({
             <TextArea
                 label="Content"
                 value={content}
+                rows={18}
                 onChange={setContent}
                 required
             />
@@ -143,12 +151,45 @@ export default function ProjectForm({
 
             </div>
 
-            <SelectField
-                label="Status"
-                value={status}
-                options={PROJECT_STATUSES}
-                onChange={setStatus}
-            />
+            <div className="grid gap-6 md:grid-cols-2">
+
+                <SelectField
+                    label="Status"
+                    value={status}
+                    options={PROJECT_STATUSES}
+                    onChange={setStatus}
+                />
+
+                <div>
+                    <label className="mb-2 block text-sm font-medium text-zinc-300">
+                        Featured Order
+                    </label>
+
+                    <input
+                        type="number"
+                        min={0}
+                        value={featuredOrder}
+                        onChange={(e) =>
+                            setFeaturedOrder(Number(e.target.value))
+                        }
+                        className="
+                            w-full
+                            rounded-xl
+                            border
+                            border-zinc-700
+                            bg-zinc-900
+                            px-4
+                            py-3
+                            transition
+                            focus:border-blue-500
+                            focus:outline-none
+                            focus:ring-2
+                            focus:ring-blue-500/30
+                        "
+                    />
+                </div>
+
+            </div>
 
             <div className="grid gap-6 md:grid-cols-2">
 

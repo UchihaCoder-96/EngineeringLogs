@@ -33,5 +33,6 @@ public class Project
     public int ViewCount { get; set; }
 
     public string Slug { get; set; } = string.Empty;
+
     public string Content { get; set; } = string.Empty;
 }

@@ -98,7 +98,7 @@ export default function JournalForm({
                 label="Content"
                 value={content}
                 onChange={setContent}
-                rows={6}
+                rows={18}
                 required
                 placeholder="Describe today's progress..."
             />

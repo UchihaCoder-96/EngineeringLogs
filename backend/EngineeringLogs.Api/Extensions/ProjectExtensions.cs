@@ -21,7 +21,10 @@ namespace EngineeringLogs.Api.Extensions
                 DemoUrl = project.DemoUrl,
                 Thumbnail = project.Thumbnail,
                 Technologies = project.Technologies,
-                Content = project.Content
+                Content = project.Content,
+                StartDate = project.StartDate ?? DateTime.MinValue,
+                LastUpdated = project.LastUpdated ?? DateTime.MinValue,
+                FeaturedOrder = project.FeaturedOrder ?? 0
             };
         }
     }

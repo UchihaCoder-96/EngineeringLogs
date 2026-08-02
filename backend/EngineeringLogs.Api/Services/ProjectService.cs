@@ -125,7 +125,7 @@ public class ProjectService : IProjectService
             ShortDescription = createProjectDto.ShortDescription,
             Status = createProjectDto.Status,
             Technologies = createProjectDto.Technologies ?? new List<string>(),
-            FeaturedOrder = null,
+            FeaturedOrder = createProjectDto.FeaturedOrder ?? 0,
             Thumbnail = createProjectDto.Thumbnail ?? string.Empty,
             GithubUrl = createProjectDto.GithubUrl ?? string.Empty,
             DemoUrl = createProjectDto.DemoUrl ?? string.Empty,
@@ -163,6 +163,7 @@ public class ProjectService : IProjectService
         project.Thumbnail = updateProjectDto.Thumbnail ?? string.Empty;
         project.LastUpdated = DateTime.UtcNow;
         project.Content = updateProjectDto.Content;
+        project.FeaturedOrder = updateProjectDto.FeaturedOrder ?? 0;
 
         // If title changed, regenerate slug and ensure uniqueness
         var newSlug = GenerateSlug(project.Title);

@@ -26,5 +26,11 @@
 
         public List<string> Technologies { get; set; } = new List<string>();
         public string Content { get; set; } = string.Empty;
+
+        public DateTime StartDate { get; set; }
+        public DateTime LastUpdated { get; set; }
+
+        public int FeaturedOrder { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HeartCrack } from "lucide-react";
 
 export default function Footer() {
     return (
@@ -56,7 +57,7 @@ export default function Footer() {
                     </p>
 
                     <p>
-                        Built with Next.js, React & Tailwind CSS.
+                        Built with Next.js, React & Tailwind CSS. (and a few headaches) <HeartCrack className="inline h-4 w-4 text-red-500" />
                     </p>
 
                 </div>

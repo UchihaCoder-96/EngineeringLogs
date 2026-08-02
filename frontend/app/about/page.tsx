@@ -1,12 +1,23 @@
+import Image from "next/image";
+import { FaGithub, FaDiscord } from "react-icons/fa6";
+
 export default function Page() {
     return (
         <main className="min-h-screen bg-zinc-950 text-white">
             <section className="mx-auto max-w-6xl px-6 py-20">
-                
+
                 <div className="flex flex-col items-center gap-8 md:flex-row md:items-center">
 
                     <div className="flex h-44 w-44 items-center justify-center rounded-full border-2 border-zinc-700 bg-zinc-900 text-zinc-500">
-                        Avatar
+                        <div className="relative h-44 w-44 overflow-hidden rounded-full border-2 border-zinc-700 bg-zinc-900">
+                            <Image
+                                src="/assets/site/avatar-1.png"
+                                alt="Avatar"
+                                fill
+                                className="object-cover"
+                                priority
+                            />
+                        </div>
                     </div>
 
                     <div className="flex-1">
@@ -36,16 +47,62 @@ export default function Page() {
 
                 <div className="my-16 h-px bg-zinc-800" />
 
-                <section>
+                <section className="mt-20">
                     <h2 className="text-3xl font-bold">
-                        About Me
+                        Contact Me
                     </h2>
 
                     <p className="mt-6 leading-8 text-zinc-400">
-                        Uhh... What to add here? I guess i will add a few lines about me later...
+                        Feel free to reach out if you have questions, feedback, or want to discuss
+                        engineering, programming, robotics, or any of my projects.
                     </p>
-                </section>
 
+                    <div className="mt-8 flex flex-col gap-4">
+
+                        <a
+                            href="https://github.com/UchihaCoder-96/"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="group flex items-center gap-4 rounded-2xl border border-zinc-800 bg-zinc-900 p-5 transition hover:border-zinc-700 hover:bg-zinc-800"
+                        >
+                            <div className="rounded-xl bg-zinc-800 p-3">
+                                <FaGithub className="h-6 w-6 text-white" />
+                            </div>
+
+                            <div>
+                                <h3 className="font-semibold text-white">
+                                    GitHub
+                                </h3>
+
+                                <p className="text-sm text-zinc-400 group-hover:text-zinc-300">
+                                    UchihaCoder-96
+                                </p>
+                            </div>
+                        </a>
+
+                        <a
+                            href="https://discord.com/users/1038867403632807947"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="group flex items-center gap-4 rounded-2xl border border-zinc-800 bg-zinc-900 p-5 transition hover:border-zinc-700 hover:bg-zinc-800"
+                        >
+                            <div className="rounded-xl bg-zinc-800 p-3">
+                                <FaDiscord className="h-6 w-6 text-indigo-400" />
+                            </div>
+
+                            <div>
+                                <h3 className="font-semibold text-white">
+                                    Discord
+                                </h3>
+
+                                <p className="text-sm text-zinc-400 group-hover:text-zinc-300">
+                                    General Meowth
+                                </p>
+                            </div>
+                        </a>
+
+                    </div>
+                </section>
                 <section className="mt-16">
                     <h2 className="text-3xl font-bold">
                         Interests
@@ -93,18 +150,14 @@ export default function Page() {
 
                     <div className="mt-8 flex flex-wrap gap-3">
                         {[
-                            "Basic C++",
                             "Python",
                             "C#",
-                            "HTML/CSS",
-                            "JS/TS",
-                            "React",
-                            "Next.js",
-                            "Arduino",
+                            "Basic C++",
+                            "Full-Stack Web-Dev",
+                            "Arduino/Raspberry Pi",
                             "Fusion 360",
                             "Blender",
-                            "Unity",
-                            "Unreal Engine",
+                            "Game Development (Unity, Unreal Engine)",
                             "Digital Art (Krita, Photoshop)",
                         ].map((skill) => (
                             <span
@@ -176,7 +229,7 @@ export default function Page() {
                             </h3>
 
                             <p className="mt-2 text-zinc-400">
-                                Placeholder description.
+                                Do i even need a description here??
                             </p>
                         </div>
 
@@ -203,10 +256,11 @@ export default function Page() {
                     </h2>
 
                     <p className="mt-6 text-lg italic leading-8 text-zinc-400">
-                        "Naani ga sukki!!?"
+                        "The unknown is an invitation."
                     </p>
                 </section>
             </section>
         </main>
     );
 }
+
