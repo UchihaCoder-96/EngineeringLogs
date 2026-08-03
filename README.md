@@ -1,90 +1,69 @@
-# Engineering Logs
+# EngineeringLogs
 
-Engineering Logs is my personal engineering notebook where I document projects, experiments, failures, and lessons learned across robotics, software engineering, and computer science.
+EngineeringLogs is a full-stack web application for showcasing engineering projects and maintaining a technical journal. It features a secure admin dashboard for content management, Markdown-powered articles, and a modern responsive interface.
 
-Instead of showcasing only finished projects, this website focuses on the entire engineering journey—from initial ideas and planning to debugging, refactoring, and final implementation.
+## ✨ Features
 
----
+- 🔐 JWT Authentication
+- 📝 Create, edit, and delete Projects & Journals
+- 📖 Markdown support
+- 💻 Syntax highlighting for code blocks
+- 📐 LaTeX math rendering
+- 👁️ View counter for articles
+- 🔍 SEO & Open Graph metadata
+- 📱 Responsive design
+- ⚡ Fast ASP.NET Core + Next.js architecture
 
-## Features
-
-- 📂 Project showcase with detailed write-ups
-- 📖 Engineering journal documenting progress and lessons learned
-- 🔍 Project search and filtering
-- ⭐ Featured projects
-- 📄 Dynamic project and journal pages
-- 🌐 RESTful backend API
-
----
-
-## Tech Stack
-
-### Frontend
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
+## 🛠️ Tech Stack
 
 ### Backend
-- ASP.NET Core Web API
-- C#
-- Dependency Injection
-- REST API
-
-### Planned
+- ASP.NET Core 10
 - Entity Framework Core
 - PostgreSQL
-- Authentication & Authorization
-- Admin Dashboard
-- Project Analytics
-
----
-
-## Project Structure
-
-```text
-EngineeringLogs/
-├── frontend/      # Next.js frontend
-├── backend/       # ASP.NET Core Web API
-└── README.md
-```
-
----
-
-## Current Progress
+- JWT Authentication
 
 ### Frontend
-- ✅ Responsive landing page
-- ✅ Navigation
-- ✅ Project system
-- ✅ Journal system
-- ✅ Dynamic routing
-- ✅ Search and filtering
-- ✅ Reusable components
-- ✅ TypeScript models
+- Next.js 16
+- React 19
+- Tailwind CSS
+- React Markdown
+- KaTeX
+- Highlight.js
+
+## 🚀 Running Locally
 
 ### Backend
-- ✅ ASP.NET Core Web API
-- ✅ Controller-based architecture
-- ✅ Dependency Injection
-- ✅ Service layer
-- ✅ Project & Journal endpoints
-- ✅ Strongly typed models with enums
 
----
+```bash
+cd backend/EngineeringLogs.Api
+dotnet restore
+dotnet ef database update
+dotnet run
+```
 
-## Roadmap
+### Frontend
 
-- [x] Frontend foundation
-- [x] Backend API foundation
-- [ ] Connect frontend to backend
-- [ ] Entity Framework Core
-- [ ] PostgreSQL database
-- [ ] Authentication
-- [ ] Admin dashboard
-- [ ] Analytics
-- [ ] Deployment
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
----
+The frontend runs on **http://localhost:3000** and communicates with the ASP.NET Core API.
 
-This repository is a long-term engineering notebook where I build in public, document my learning process, and continuously improve both the software and my engineering skills.
+## 📸 Screenshots
+
+> Screenshots coming soon.
+
+## 🔮 Future Plans
+
+- Search functionality
+- Tags & categories
+- Rich Markdown editor
+- Image uploads
+- Analytics dashboard
+- Article recommendations
+
+## 📄 License
+
+This project is open source and available under the MIT License.
