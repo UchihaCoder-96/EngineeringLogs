@@ -7,9 +7,11 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using EngineeringLogs.Api.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 
+EnvVar.ConnectionString = builder.Configuration["ConnectionStrings:DefaultConnection"] ?? string.Empty;
 // Add services to the container.
 
 builder.Services.AddControllers()
@@ -45,6 +47,7 @@ builder.Services.AddScoped<IJwtService, JwtService>();
 
 // Register DbContext
 var connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
+Console.WriteLine($"Connection: {connectionString}");
 
 builder.Services.AddDbContext<EngineeringLogsDbContext>(options =>
 {
@@ -56,7 +59,8 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("Frontend", policy =>
     {
-        policy.WithOrigins("http://localhost:3000")
+        policy.WithOrigins("http://localhost:3000",
+            "https://engineering-logs-five.vercel.app")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
