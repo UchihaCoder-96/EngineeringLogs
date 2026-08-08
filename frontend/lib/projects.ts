@@ -3,7 +3,9 @@ import { Project } from "@/types/project";
 import { stripEmptyFields, getAuthHeaders } from "@/utils/Utility";
 
 export async function getProjects(): Promise<Project[]> {
-    const response = await fetch(`${API_BASE_URL}/api/projects`);
+    const response = await fetch(`${API_BASE_URL}/api/projects`, {
+        cache: "no-store",
+    });
 
     if (!response.ok) {
         throw new Error("Failed to fetch projects");
@@ -13,7 +15,9 @@ export async function getProjects(): Promise<Project[]> {
 }
 
 export async function getProject(slug: string): Promise<Project> {
-    const response = await fetch(`${API_BASE_URL}/api/projects/${slug}`);
+    const response = await fetch(`${API_BASE_URL}/api/projects/${slug}`, {
+        cache: "no-store",
+    });
 
     if (!response.ok) {
         throw new Error("Failed to fetch project");
